@@ -14,8 +14,6 @@
 Route::get('/', function () {
     return view('index');
 });
-
-
 Auth::routes();
-
+Route::resource('/jokes', 'JokesController');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,11 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @toastr_css
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Blogprawo.pl') }}
                 </a>
@@ -31,21 +32,18 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
 
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Zaloguj') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Zarejestruj') }}</a>
                                 </li>
                             @endif
                         @else
@@ -72,9 +70,41 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
+        <main class="m-4">
+            <div class="row">
+                <div class="col-3">
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{{route('home')}}">Strona główna</a></li>
+                        <li class="list-group-item"><a href="">Ustawienia</a></li>
+                        <li class="list-group-item"><a href="{{route('jokes.index')}}">Dowcipy</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-9">
+                    @yield('content')
+                </div>
+            </div>
+
         </main>
     </div>
+    <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+    @toastr_js
+    @toastr_render
+    <script>
+
+        if ($('textarea#content').length>0) {
+            var CSRFToken = $('meta[name="csrf-token"]').attr('content');
+            CKEDITOR.replace('content', {
+                language: 'pl',
+                // uiColor: '#66AB16',
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='+CSRFToken
+            });
+        }
+
+
+    </script>
 </body>
 </html>
