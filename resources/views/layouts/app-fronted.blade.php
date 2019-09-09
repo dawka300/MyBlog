@@ -113,13 +113,12 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tematy</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown05">
-                                <a class="dropdown-item" href="category.html">Lifestyle</a>
-                                <a class="dropdown-item" href="category.html">Food</a>
-                                <a class="dropdown-item" href="category.html">Adventure</a>
-                                <a class="dropdown-item" href="category.html">Travel</a>
-                                <a class="dropdown-item" href="category.html">Business</a>
+                                @foreach($topics as $topic)
+                                    <a class="dropdown-item" href="category.html">{{$topic->topic}}</a>
+                                    @endforeach
+
                             </div>
 
                         </li>
@@ -147,7 +146,7 @@
                 <div class="col-md-4">
                     <h3>O mnie</h3>
                     <p class="mb-4">
-                        <img src="images/img_1.jpg" alt="Image placeholder" class="img-fluid">
+                        <img src="{{asset('images/img_3.jpg')}}" alt="Image placeholder" class="img-fluid">
                     </p>
 
                     <p>{!! Str::limit(strip_tags($settings->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj więcej...</a></p>
@@ -155,7 +154,7 @@
                 <div class="col-md-6 ml-auto">
                     <div class="row">
                         <div class="col-md-7">
-                            <h3>Latest Post</h3>
+                            <h3>Ostatnie wpisy</h3>
                             <div class="post-entry-sidebar">
                                 <ul>
                                     <li>
@@ -202,18 +201,18 @@
                         <div class="col-md-4">
 
                             <div class="mb-5">
-                                <h3>Quick Links</h3>
+                                <h3>Podstrony</h3>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="{{route('about')}}">O mnie</a></li>
                                     <li><a href="#">Travel</a></li>
                                     <li><a href="#">Adventure</a></li>
                                     <li><a href="#">Courses</a></li>
-                                    <li><a href="#">Categories</a></li>
+                                    <li><a href="#">Tematy</a></li>
                                 </ul>
                             </div>
 
                             <div class="mb-5">
-                                <h3>Social</h3>
+                                <h3>Social Media</h3>
                                 <ul class="list-unstyled footer-social">
                                     <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
                                     <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>

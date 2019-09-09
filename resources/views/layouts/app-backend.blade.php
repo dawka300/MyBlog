@@ -77,6 +77,7 @@
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-dark"><a href="{{route('home')}}">Strona główna</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('settings')}}">Ustawienia</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('topics.index')}}">Tematy</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('jokes.index')}}">Dowcipy</a></li>
                     </ul>
                         @endauth

@@ -8,9 +8,11 @@
 <div class="row">
     <table class="table mt-2 table-dark table-hover">
         <thead>
+        <tr>
         <th>No.</th>
         <th>Treść</th>
         <th>Operacje</th>
+        </tr>
         </thead>
         <tbody>
         @if(count($jokes)>0)
