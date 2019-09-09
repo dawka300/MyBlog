@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Blogprawo.pl') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -45,9 +45,9 @@
                         @guest
                             <a href="{{ route('login') }}"><span class="fa fa-sign-in"></span></a>
 
-                           {{-- @if (Route::has('register'))
-                                    <a href="{{ route('register') }}">{{ __('Register') }}</a>
-                            @endif--}}
+                            {{-- @if (Route::has('register'))
+                                     <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                             @endif--}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -72,7 +72,7 @@
                         <!-- <a href="#"><span class="fa fa-search"></span></a> -->
                         <form action="#" class="search-top-form">
                             <span class="icon fa fa-search"></span>
-                            <input type="text" id="s" placeholder="Wpisz szukaną frazę...">
+                            <input type="text" id="s" placeholder="Type keyword to search...">
                         </form>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
             <div class="row pt-5">
                 <div class="col-12 text-center">
                     <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                    <h1 class="site-logo"><a href="/">{{ config('app.name', 'Blogprawo.pl') }}</a></h1>
+                    <h1 class="site-logo"><a href="/">{{config('app.name')}}</a></h1>
                 </div>
             </div>
         </div>
@@ -94,9 +94,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarMenu">
                     <ul class="navbar-nav mx-auto">
-
+                        {{--<li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>--}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Business</a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tematy</a>
+                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Travel</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 <a class="dropdown-item" href="category.html">Asia</a>
                                 <a class="dropdown-item" href="category.html">Europe</a>
@@ -106,23 +111,8 @@
                             </div>
 
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">O mnie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Wsparcie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Dowcipy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Program PESEL</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Kontakt</a>
-                        </li>
 
-                       {{-- <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown05">
                                 <a class="dropdown-item" href="category.html">Lifestyle</a>
@@ -132,8 +122,13 @@
                                 <a class="dropdown-item" href="category.html">Business</a>
                             </div>
 
-                        </li>--}}
-
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('about')}}">O mnie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('contact')}}">Kontakt</a>
+                        </li>
                     </ul>
 
                 </div>
@@ -142,16 +137,20 @@
     </header>
     <!-- END header -->
 
+@yield('content')
+
+
+
     <footer class="site-footer">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-4">
-                    <h3>About Us</h3>
+                    <h3>O mnie</h3>
                     <p class="mb-4">
                         <img src="images/img_1.jpg" alt="Image placeholder" class="img-fluid">
                     </p>
 
-                    <p>Lorem ipsum dolor sit amet sa ksal sk sa, consectetur adipisicing elit. Ipsa harum inventore reiciendis. <a href="#">Read More</a></p>
+                    <p>{!! Str::limit(strip_tags($settings->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj więcej...</a></p>
                 </div>
                 <div class="col-md-6 ml-auto">
                     <div class="row">
@@ -161,7 +160,7 @@
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <img src="images/img_6.jpg" alt="Image placeholder" class="mr-4">
+                                            <img src="{{asset('images/img_6.jpg')}}" alt="Image placeholder" class="mr-4">
                                             <div class="text">
                                                 <h4>How to Find the Video Games of Your Youth</h4>
                                                 <div class="post-meta">
@@ -173,7 +172,7 @@
                                     </li>
                                     <li>
                                         <a href="">
-                                            <img src="images/img_3.jpg" alt="Image placeholder" class="mr-4">
+                                            <img src="{{asset('images/img_3.jpg')}}" alt="Image placeholder" class="mr-4">
                                             <div class="text">
                                                 <h4>How to Find the Video Games of Your Youth</h4>
                                                 <div class="post-meta">
@@ -240,10 +239,17 @@
         </div>
     </footer>
     <!-- END footer -->
+
 </div>
+<script src="{{asset('js/jquery-migrate-3.0.0.js')}}"></script>
+{{--<script src="{{asset('js/popper.min.js')}}"></script>--}}
+{{--<script src="js/bootstrap.min.js"></script>--}}
+<script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+
+<script src="{{asset('js/main.js')}}"></script>
 
 </body>
 </html>

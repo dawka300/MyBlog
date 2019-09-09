@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'FrontendController@index');
+Route::get('/o_mnie', 'FrontendController@about')->name('about');
+Route::get('/kontakt', 'FrontendController@contact')->name('contact');
 Auth::routes();
+
 Route::resource('/jokes', 'JokesController');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/ustawienia', 'SettingsController@index')->name('settings');
+Route::put('/ustawienia', 'SettingsController@store')->name('change_settings');
+
+

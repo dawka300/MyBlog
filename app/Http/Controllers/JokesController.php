@@ -37,7 +37,7 @@ class JokesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'content'=>'required|min:100'
+           'content'=>'required|min:50'
         ]);
 
         Joke::create([
@@ -46,7 +46,7 @@ class JokesController extends Controller
 
         toastr('Zapisano dowcip');
 
-        return back();
+        return redirect()->route('jokes.index');
     }
 
     /**
@@ -68,7 +68,9 @@ class JokesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $joke=Joke::find($id);
+
+        return view('jokes.edit', ['joke'=>$joke]);
     }
 
     /**
@@ -80,7 +82,15 @@ class JokesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'content'=>'required|min:50'
+        ]);
+
+        Joke::find($id)->update($request->all());
+
+        toastr()->success('Zmieniłeś tekst');
+
+        return redirect()->route('jokes.index');
     }
 
     /**
@@ -91,6 +101,10 @@ class JokesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Joke::find($id)->delete();
+
+        toastr()->warning('Usunałeś dowcip z bazy danych');
+
+        return redirect()->route('jokes.index');
     }
 }

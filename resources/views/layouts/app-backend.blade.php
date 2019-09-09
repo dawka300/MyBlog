@@ -73,11 +73,13 @@
         <main class="m-4">
             <div class="row">
                 <div class="col-3">
+                    @auth
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="{{route('home')}}">Strona główna</a></li>
-                        <li class="list-group-item"><a href="">Ustawienia</a></li>
-                        <li class="list-group-item"><a href="{{route('jokes.index')}}">Dowcipy</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('home')}}">Strona główna</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('settings')}}">Ustawienia</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('jokes.index')}}">Dowcipy</a></li>
                     </ul>
+                        @endauth
 
                 </div>
                 <div class="col-9">
@@ -96,7 +98,8 @@
             var CSRFToken = $('meta[name="csrf-token"]').attr('content');
             CKEDITOR.replace('content', {
                 language: 'pl',
-                // uiColor: '#66AB16',
+                uiColor: '#999999',
+                height: 380,
                 filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
                 filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
                 filebrowserBrowseUrl: '/laravel-filemanager?type=Files',

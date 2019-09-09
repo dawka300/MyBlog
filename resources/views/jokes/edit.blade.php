@@ -1,1 +1,21 @@
-<?php
+@extends('layouts.app-backend')
+
+
+@section('content')
+    @error('content')
+    <div class="alert alert-danger">{{$message}}</div>
+    @enderror
+    {!! Form::open(['action'=>['JokesController@update', 'id'=>$joke->id], 'method'=>'put']) !!}
+    <div class="form-group">
+        {{Form::label('content', 'Wpisz dowcip')}}
+        {{Form::textarea('content', $joke->content, ['class'=>'form-control'])}}
+    </div>
+    <div class="form-group">
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Zapisz dowcip</button>
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+
+@endsection
