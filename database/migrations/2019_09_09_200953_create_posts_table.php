@@ -17,11 +17,12 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('content');
-            $table->int('user_id');
-            $table->int('topic_id');
+            $table->integer('user_id');
+            $table->integer('topic_id');
             $table->string('date_public');
             $table->string('lead');
             $table->string('thumbnail');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

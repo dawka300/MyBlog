@@ -22,10 +22,13 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('/jokes', 'JokesController');
     Route::resource('/topics', 'TopicsController');
     Route::resource('/tags', 'TagsController');
-    Route::get('/ustawienia', 'SettingsController@index')->name('settings');
-    Route::put('/ustawienia', 'SettingsController@store')->name('change_settings');
-    Route::get('/pliki', 'BackendPagesController@file')->name('file');
-    Route::get('/zdjecia', 'BackendPagesController@image')->name('image');
+    Route::get('/settings', 'SettingsController@index')->name('settings');
+    Route::put('/settings', 'SettingsController@store')->name('change_settings');
+    Route::get('/files', 'BackendPagesController@file')->name('file');
+    Route::get('/image', 'BackendPagesController@image')->name('image');
+    Route::get('/user', 'UsersController@index')->name('user');
+    Route::put('/user', 'UsersController@update')->name('user_update');
+
 });
 
 

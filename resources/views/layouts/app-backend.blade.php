@@ -79,11 +79,12 @@
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-dark"><a href="{{route('home')}}">Strona główna</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('settings')}}">Ustawienia</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('user')}}">Użytkownik</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('topics.index')}}">Tematy</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('tags.index')}}">Tagi</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('jokes.index')}}">Dowcipy</a></li>
-                        <li class="list-group-item list-group-item-dark"><a href="{{route('file')}}">Pliki</a></li>
-                        <li class="list-group-item list-group-item-dark"><a href="{{route('image')}}">Zdjęcia</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('file')}}">Zdjęcia</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('image')}}">Pliki</a></li>
                     </ul>
                         @endauth
 
@@ -105,13 +106,19 @@
             var CSRFToken = $('meta[name="csrf-token"]').attr('content');
             CKEDITOR.replace('content', {
                 language: 'pl',
-                uiColor: '#999999',
+                // uiColor: '#999999',
                 height: 380,
-                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
-                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='+CSRFToken
-                // filebrowserImageBrowseUrl: '/file-manager/ckeditor'
+                skin: 'kama',
+                // filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                // filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
+                // filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                // filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='+CSRFToken
+                // filebrowserImageBrowseUrl: '/file-manager/ckeditor',
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Files&_token='+CSRFToken,
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken
+
             });
         }
 

@@ -266,7 +266,7 @@
     Dropzone.options.uploadForm = {
       paramName: "upload[]", // The name that will be used to transfer the file
       uploadMultiple: false,
-      parallelUploads: 5,
+      parallelUploads: 10,
       clickable: '#upload-button',
       dictDefaultMessage: lang['message-drop'],
       init: function() {
