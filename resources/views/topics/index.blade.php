@@ -1,6 +1,7 @@
 @extends('layouts.app-backend')
 
 
+
 @section('content')
     <a href="{{route('topics.create')}}" class="btn btn-primary">Dodaj temat</a>
     <table class="table table-dark mt-4">

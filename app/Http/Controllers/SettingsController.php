@@ -23,8 +23,7 @@ class SettingsController extends Controller
             'twitter' => 'url|nullable',
             'yt' => 'url|nullable',
             'account' => 'nullable|numeric',
-            'photo1' => 'nullable|image',
-            'photo2' => 'nullable|image'
+            'filepath' => 'nullable|string'
 
 
         ]);
@@ -34,15 +33,18 @@ class SettingsController extends Controller
         $settings->fb = $request->fb;
         $settings->twitter = $request->twitter;
         $settings->yt = $request->yt;
+        $settings->photo1=$request->filepath;
 
-        if ($request->file()) {
+       /* if ($request->file()) {
             foreach ($request->file() as $key => $photo):
                 $fileToStore = $photo->getClientOriginalName();
                 $fileToStore = (string)mt_rand() . "_" . $fileToStore;
                 $photo->storeAs('public/photos/admin', $fileToStore);
                 $settings->$key = $fileToStore;
             endforeach;
-        };
+        };*/
+//        $a=new ImageUpload();
+
 
         $settings->save();
         toastSuccess('Zmieniłeś dane poprawnie');

@@ -49,12 +49,12 @@
                                      <a href="{{ route('register') }}">{{ __('Register') }}</a>
                              @endif--}}
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown" style="list-style: none; display: inline-block;">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right text-white" aria-labelledby="navbarDropdown" style="background-color: #6610f2; ">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

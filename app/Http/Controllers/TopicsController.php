@@ -65,7 +65,7 @@ class TopicsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('topics.edit', ['topic'=>Topic::find($id)]);
     }
 
     /**
@@ -77,7 +77,17 @@ class TopicsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'topic'=>'required|string'
+        ]);
+//        Topic::find($id)->save(['topic'=>$request->topic]);
+        $topic=Topic::find($id);
+        $topic->topic=$request->topic;
+        $topic->save();
+
+        toastSuccess('Zmieniłeś temat');
+
+        return redirect()->route('topics.index');
     }
 
     /**

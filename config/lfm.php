@@ -28,7 +28,7 @@ return [
 
     'allow_multi_user'         => true,
 
-    'allow_share_folder'       => true,
+    'allow_share_folder'       => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -84,15 +84,15 @@ return [
 
     'disk'                     => 'public',
 
-    'rename_file'              => false,
+    'rename_file'              => true,
 
     'alphanumeric_filename'    => false,
 
     'alphanumeric_directory'   => false,
 
-    'should_validate_size'     => false,
+    'should_validate_size'     => true,
 
-    'should_validate_mime'     => false,
+    'should_validate_mime'     => true,
 
     // permissions to be set when create a new folder or when it creates automatically with thumbnails
     'create_folder_mode'       => 0755,
@@ -134,7 +134,7 @@ return [
     |--------------------------------------------------------------------------
      */
 
-    'resize_aspectRatio'       => false,
+    'resize_aspectRatio'       => true,
 
     'resize_containment'       => true,
 

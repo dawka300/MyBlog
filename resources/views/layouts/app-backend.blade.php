@@ -15,9 +15,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
     @toastr_css
 </head>
 <body>
@@ -78,7 +80,10 @@
                         <li class="list-group-item list-group-item-dark"><a href="{{route('home')}}">Strona główna</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('settings')}}">Ustawienia</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('topics.index')}}">Tematy</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('tags.index')}}">Tagi</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('jokes.index')}}">Dowcipy</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('file')}}">Pliki</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('image')}}">Zdjęcia</a></li>
                     </ul>
                         @endauth
 
@@ -90,6 +95,7 @@
 
         </main>
     </div>
+    <script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
     <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
     @toastr_js
     @toastr_render
@@ -105,6 +111,7 @@
                 filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
                 filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
                 filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='+CSRFToken
+                // filebrowserImageBrowseUrl: '/file-manager/ckeditor'
             });
         }
 

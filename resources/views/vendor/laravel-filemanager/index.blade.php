@@ -275,6 +275,7 @@
           if (response == 'OK') {
             loadFolders();
           } else {
+              loadFolders();
             this.defaultOptions.error(file, response.join('\n'));
           }
         });

@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'FrontendController@index');
 Route::get('/o_mnie', 'FrontendController@about')->name('about');
 Route::get('/kontakt', 'FrontendController@contact')->name('contact');
@@ -23,6 +24,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('/tags', 'TagsController');
     Route::get('/ustawienia', 'SettingsController@index')->name('settings');
     Route::put('/ustawienia', 'SettingsController@store')->name('change_settings');
+    Route::get('/pliki', 'BackendPagesController@file')->name('file');
+    Route::get('/zdjecia', 'BackendPagesController@image')->name('image');
 });
 
 

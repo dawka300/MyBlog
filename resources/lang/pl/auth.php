@@ -14,6 +14,6 @@ return [
     */
 
     'failed' => 'Podane dane logowania są nieprawidłowe.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'throttle' => 'Za dużo prób logowania. Proszę spróbować za :seconds sekund.',
 
 ];
