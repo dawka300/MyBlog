@@ -16,13 +16,14 @@ class UsersController extends Controller
     public function update(Request $request){
         $this->validate($request, [
             'name'=>'required|string|min:3',
-            'nickname'=>'required|string|min:2|max:150|unique:users,nickname',
+            'nickname'=>'required|string|min:2|max:150',
             'about'=>'required|min:50',
             'main_filepath'=>'nullable|string|min:6',
             'tiny_filepath'=>'nullable|string|min:6'
 
 
         ]);
+//        dd($request->all());
         $user=User::find(Auth::id());
         $user->name=$request->name;
         $user->nickname=$request->nickname;

@@ -2,15 +2,7 @@
 
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('inc.error')
     {!! Form::open(['action'=>'SettingsController@store', 'method'=>'put']) !!}
 
     <div class="form-group">

@@ -146,10 +146,10 @@
                 <div class="col-md-4">
                     <h3>O mnie</h3>
                     <p class="mb-4">
-                        <img src="{{asset('images/img_3.jpg')}}" alt="Image placeholder" class="img-fluid">
+                        <img src="{{asset('storage/'.Auth::user()->main_photo)}}" alt="Image placeholder" class="img-fluid">
                     </p>
 
-                    <p>{!! Str::limit(strip_tags($settings->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj więcej...</a></p>
+                    <p>{!! Str::limit(strip_tags(Auth::user()->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj więcej...</a></p>
                 </div>
                 <div class="col-md-6 ml-auto">
                     <div class="row">

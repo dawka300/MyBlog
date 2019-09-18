@@ -9,7 +9,7 @@
 {{form::submit('Zapisz', ['class'=>['btn', 'btn-success']])}}
     {{Form::close()}}
 
-<div style="height: 600px;">
+{{--<div style="height: 600px;">
     <div id="fm"></div>
-</div>
+</div>--}}
 @endsection

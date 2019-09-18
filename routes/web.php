@@ -22,6 +22,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('/jokes', 'JokesController');
     Route::resource('/topics', 'TopicsController');
     Route::resource('/tags', 'TagsController');
+    Route::resource('/posts', 'PostsController');
     Route::get('/settings', 'SettingsController@index')->name('settings');
     Route::put('/settings', 'SettingsController@store')->name('change_settings');
     Route::get('/files', 'BackendPagesController@file')->name('file');

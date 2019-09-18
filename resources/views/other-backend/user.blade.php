@@ -1,6 +1,8 @@
 @extends('layouts.app-backend')
 
 @section('content')
+{{--    {{dd($user)}}--}}
+@include('inc.error')
     {!! Form::open(['action'=>['UsersController@update', 'id'=>$user->id], 'method'=>'PUT', 'class'=>'text-white']) !!}
     <div class="from-group">
         <h3>Twoje imię i nazwisko</h3>
