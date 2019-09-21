@@ -58,6 +58,11 @@ class PostsController extends Controller
 
         ]);
 //        dd($request->all());
+        if($request->marked){
+            $marked=1;
+        }else{
+            $marked=0;
+        }
         $filePath=$request->lead;
         $file_name=substr($filePath, strrpos($filePath, '/')+1, strlen($filePath)-1);
         $filePath=substr($filePath,0, strrpos($filePath, '/')+1);
@@ -73,7 +78,8 @@ class PostsController extends Controller
             'lead'=>$request->lead,
             'thumbnail'=>$thumbnailPath,
             'meta_desc'=>$request->meta_desc,
-            'number'=>$request->number
+            'number'=>$request->number,
+            'marked'=>$marked
 
         ]);
         $post->tags()->attach($request->tags);
@@ -134,6 +140,13 @@ class PostsController extends Controller
             'date_public'=>'date|required',
             'number'=>'numeric|required'
         ]);
+
+        if($request->marked){
+//            dd($request->all());
+            $marked=1;
+        }else{
+            $marked=0;
+        }
         $post=Post::find($id);
         $filePath=$request->lead;
         $file_name=substr($filePath, strrpos($filePath, '/')+1, strlen($filePath)-1);
@@ -148,7 +161,8 @@ class PostsController extends Controller
             'lead'=>$request->lead,
             'thumbnail'=>$thumbnailPath,
             'meta_desc'=>$request->meta_desc,
-            'number'=>$request->number
+            'number'=>$request->number,
+            'marked'=>$marked
 
         ]);
 

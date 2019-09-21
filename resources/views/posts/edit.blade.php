@@ -75,6 +75,14 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <h3>Wyróżniony post</h3>
+                {{Form::checkbox('marked', null, $post->marked==1 ? true : false, ['class'=>['form-control'] ])}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-6">
             <h3 class="text-white">Wybierz zdjęcie - lead</h3>
             <div class="input-group">
@@ -115,6 +123,24 @@
 
 
     {{Form::close()}}
+    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#lfm, #lfm2').filemanager('image');
+            $('#thumbnail, #thumbnail2').change(function () {
+                let pathToFile = $(this).val();
 
+                if ($(this).prop('id') === 'thumbnail') {
+                    $('#holder').attr('src', pathToFile);
+                } else {
+                    $('#holder2').attr('src', pathToFile);
+                }
+
+                $(this).val(pathToFile.slice(pathToFile.indexOf('photos/'), pathToFile.length));
+
+            });
+        });
+
+    </script>
 
 @endsection

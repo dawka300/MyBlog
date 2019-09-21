@@ -61,6 +61,14 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <h3>Wyróżniony post</h3>
+                {{Form::checkbox('marked',null, null, ['class'=>['form-control'] ])}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-6">
             <h3 class="text-white">Wybierz zdjęcie - lead</h3>
             <div class="input-group">
@@ -94,9 +102,9 @@
     </div>
 
 
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-12">
-    {{form::submit('Zapisz', ['class'=>['btn', 'btn-success']])}}
+          {{form::submit('Zapisz', ['class'=>['btn', 'btn-success', 'btn-block']])}}
         </div>
         </div>
     {{Form::close()}}

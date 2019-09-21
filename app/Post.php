@@ -10,7 +10,7 @@ class Post extends Model
     use SoftDeletes;
 
     protected $fillable=[
-        'title', 'content', 'slug', 'user_id', 'topic_id', 'date_public', 'lead', 'meta_desc', 'thumbnail', 'number'
+        'title', 'content', 'slug', 'user_id', 'topic_id', 'date_public', 'lead', 'meta_desc', 'thumbnail', 'number', 'marked'
     ];
 
     public function topic(){

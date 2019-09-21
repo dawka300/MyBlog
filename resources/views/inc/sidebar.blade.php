@@ -26,42 +26,22 @@
     </div>--}}
     <!-- END sidebar-box -->
     <div class="sidebar-box">
-        <h3 class="heading">Popularne wpisy</h3>
+        <h3 class="heading">Wyróżnione wpisy</h3>
         <div class="post-entry-sidebar">
             <ul>
+                @foreach($markedPosts as $post)
                 <li>
-                    <a href="">
-                        <img src="images/img_2.jpg" alt="Image placeholder" class="mr-4">
+                    <a href="{{route('single', ['slug'=>$post->slug])}}">
+                        <img src="{{asset('storage/'.$post->lead)}}" alt="{{$post->title}}" class="mr-4">
                         <div class="text">
-                            <h4>How to Find the Video Games of Your Youth</h4>
+                            <h4>{{$post->title}}</h4>
                             <div class="post-meta">
                                 <span class="mr-2">March 15, 2018 </span>
                             </div>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                        <div class="text">
-                            <h4>How to Find the Video Games of Your Youth</h4>
-                            <div class="post-meta">
-                                <span class="mr-2">March 15, 2018 </span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/img_12.jpg" alt="Image placeholder" class="mr-4">
-                        <div class="text">
-                            <h4>How to Find the Video Games of Your Youth</h4>
-                            <div class="post-meta">
-                                <span class="mr-2">March 15, 2018 </span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -70,11 +50,9 @@
     <div class="sidebar-box">
         <h3 class="heading">Tematy</h3>
         <ul class="categories">
-            <li><a href="#">Food <span>(12)</span></a></li>
-            <li><a href="#">Travel <span>(22)</span></a></li>
-            <li><a href="#">Lifestyle <span>(37)</span></a></li>
-            <li><a href="#">Business <span>(42)</span></a></li>
-            <li><a href="#">Adventure <span>(14)</span></a></li>
+            @foreach($topics as $topic)
+            <li><a href="{{route('topics', ['id'=>$topic->id])}}">{{$topic->topic}} <span>{{$topic->posts->count()}}</span></a></li>
+            @endforeach
         </ul>
     </div>
     <!-- END sidebar-box -->

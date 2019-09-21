@@ -9,7 +9,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Auth::user()->about !!}
+                            {!! $user->about !!}
                         </div>
                     </div>
 

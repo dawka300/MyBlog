@@ -126,7 +126,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('joks')}}">Dowcipy</a>
+                            <a class="nav-link" href="{{route('jokes')}}">Dowcipy</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('about')}}">O mnie</a>

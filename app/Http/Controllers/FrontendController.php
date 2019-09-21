@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    protected $settings, $topics, $tags, $user, $lastPosts, $posts;
+    protected $settings, $topics, $tags, $user, $lastPosts, $posts, $markedPosts;
 
     public function __construct()
     {
@@ -20,8 +20,9 @@ class FrontendController extends Controller
         $this->topics=Topic::all();
         $this->tags=Tag::all();
         $this->user=User::where('id', 1)->first();
-        $this->lastPosts=Post::withoutTrashed()->orderBy('id', 'desc')->take(5)->get();
-        $this->posts=Post::withoutTrashed()->get();
+        $this->lastPosts=Post::withoutTrashed()->orderBy('id', 'desc')->take(3)->get();
+        $this->posts=Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
+        $this->markedPosts=Post::withoutTrashed()->where('marked', 1)->get();
     }
 
     public function index(){
@@ -31,7 +32,8 @@ class FrontendController extends Controller
             'tags'=>$this->tags,
             'user'=>$this->user,
             'posts'=>$this->posts,
-            'lastPosts'=>$this->lastPosts
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
         ]);
     }
 
@@ -42,7 +44,8 @@ class FrontendController extends Controller
           'tags'=>$this->tags,
           'user'=>$this->user,
           'posts'=>$this->posts,
-          'lastPosts'=>$this->lastPosts
+          'lastPosts'=>$this->lastPosts,
+          'markedPosts'=>$this->markedPosts
       ]);
     }
 
@@ -54,7 +57,8 @@ class FrontendController extends Controller
             'tags'=>$this->tags,
             'user'=>$this->user,
             'posts'=>$this->posts,
-            'lastPosts'=>$this->lastPosts
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
         ]);
     }
 
@@ -67,7 +71,8 @@ class FrontendController extends Controller
             'tags'=>$this->tags,
             'user'=>$this->user,
             'posts'=>$this->posts,
-            'lastPosts'=>$this->lastPosts
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
         ]);
     }
 
@@ -81,7 +86,8 @@ class FrontendController extends Controller
             'tags'=>$this->tags,
             'user'=>$this->user,
             'posts'=>$this->posts,
-            'lastPosts'=>$this->lastPosts
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
         ]);
 
     }
@@ -94,7 +100,8 @@ class FrontendController extends Controller
             'tags'=>$this->tags,
             'user'=>$this->user,
             'posts'=>$this->posts,
-            'lastPosts'=>$this->lastPosts
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
         ]);
     }
 
@@ -108,7 +115,8 @@ class FrontendController extends Controller
             'user'=>$this->user,
             'posts'=>$this->posts,
             'lastPosts'=>$this->lastPosts,
-            'jokes'=>$jokes
+            'jokes'=>$jokes,
+            'markedPosts'=>$this->markedPosts
         ]);
     }
 }
