@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -108,9 +108,11 @@
             var CSRFToken = $('meta[name="csrf-token"]').attr('content');
             CKEDITOR.replace('content', {
                 language: 'pl',
-                // uiColor: '#999999',
-                height: 380,
-                skin: 'moono',
+                extraPlugins:'basicstyles',
+                height: 880,
+                skin: 'bootstrapck',
+                contentsCss: ["body {font-size: 22px;}"],
+                // fontSize_sizes:'19/19px;24/24px;48/48px;',
                 filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
                 filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
                 filebrowserBrowseUrl: '/laravel-filemanager?type=Files',

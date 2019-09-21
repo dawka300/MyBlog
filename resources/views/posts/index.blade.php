@@ -8,7 +8,9 @@
         <thead>
         <tr>
             <th>No</th>
+            <th>Obrazek</th>
             <th>Temat</th>
+            <th>Treść</th>
             <th>Operacje</th>
         </tr>
         </thead>
@@ -17,8 +19,10 @@
             @foreach($posts as $key => $post)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$post->topic}}</td>
-                    <td><a href="{{route('topics.edit', ['id'=>$post->id])}}" class="btn btn-info">Edytuj</a> </td>
+                    <td><img width="120px" height="120px" alt="{{$post->title}}" src="{{asset('storage/'.$post->thumbnail)}}"></td>
+                    <td><i>{{$post->title}}</i></td>
+                    <td>{!!Str::limit($post->content, 200, '...')!!}</td>
+                    <td><a href="{{route('posts.edit', ['id'=>$post->id])}}" class="btn btn-info">Edytuj</a> </td>
                 </tr>
             @endforeach
         @endif

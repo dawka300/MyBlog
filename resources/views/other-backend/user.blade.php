@@ -1,8 +1,8 @@
 @extends('layouts.app-backend')
 
 @section('content')
-{{--    {{dd($user)}}--}}
-@include('inc.error')
+    {{--    {{dd($user)}}--}}
+    @include('inc.error')
     {!! Form::open(['action'=>['UsersController@update', 'id'=>$user->id], 'method'=>'PUT', 'class'=>'text-white']) !!}
     <div class="from-group">
         <h3>Twoje imię i nazwisko</h3>
@@ -60,11 +60,9 @@
             $('#lfm, #lfm2').filemanager('image');
             $('#thumbnail, #thumbnail2').change(function () {
                 let pathToFile = $(this).val();
-                console.log(pathToFile);
-                console.log($(this).prop('id'));
-                if($(this).prop('id')==='thumbnail'){
+                if ($(this).prop('id') === 'thumbnail') {
                     $('#holder').attr('src', pathToFile);
-                }else{
+                } else {
                     $('#holder2').attr('src', pathToFile);
                 }
 

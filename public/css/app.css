@@ -10649,3 +10649,12 @@ a.text-dark:focus {
   height: 200px;
 }
 
+.big-checkbox {
+  height: 17px;
+  width: 17px;
+}
+
+.big-label-checkbox {
+  font-size: 1.2rem;
+}
+

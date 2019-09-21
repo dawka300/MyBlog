@@ -3,8 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
+    @if(isset($post->meta_desc))
+        <meta name="description" content="{{$post->meta_desc}}">
+    @else
+        <meta name="description" content="prawo, porady prawne, prawnik, blog prawny, radca prawny, aplikacja radcowska">
+    @endif
+<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Blogprawo.pl') }}</title>
@@ -38,10 +42,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-9 social">
-                        <a href="#"><span class="fa fa-twitter"></span></a>
-                        <a href="#"><span class="fa fa-facebook"></span></a>
-                        <a href="#"><span class="fa fa-instagram"></span></a>
-                        <a href="#"><span class="fa fa-youtube-play"></span></a>
+                        @if(!empty($settings->twitter))
+                        <a target="_blank" href="#"><span class="fa fa-twitter"></span></a>
+                        @elseif(!empty($settings->fb))
+                        <a target="_blank" href="{{url($settings->fb)}}"><span class="fa fa-facebook"></span></a>
+                        @elseif(!empty($settings->yt))
+{{--                        <a href="#"><span class="fa fa-instagram"></span></a>--}}
+                        <a target="_blank" href="{{url($settings->yt)}}"><span class="fa fa-youtube-play"></span></a>
+                        @endif
                         @guest
                             <a href="{{ route('login') }}"><span class="fa fa-sign-in"></span></a>
 
@@ -50,22 +58,26 @@
                              @endif--}}
                         @else
                             <li class="nav-item dropdown" style="list-style: none; display: inline-block;">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right text-white" aria-labelledby="navbarDropdown" style="background-color: #6610f2; ">
+                                <div class="dropdown-menu dropdown-menu-right text-white"
+                                     aria-labelledby="navbarDropdown" style="background-color: #6610f2; ">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
                             </li>
+                            <a href="{{route("home")}}"><span class="fa fa-home"></span></a>
                         @endguest
                     </div>
                     <div class="col-3 search-top">
@@ -82,7 +94,8 @@
         <div class="container logo-wrap">
             <div class="row pt-5">
                 <div class="col-12 text-center">
-                    <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
+                    <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button"
+                       aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
                     <h1 class="site-logo"><a href="/">{{config('app.name')}}</a></h1>
                 </div>
             </div>
@@ -98,29 +111,22 @@
                             <a class="nav-link active" href="index.html">Home</a>
                         </li>--}}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Business</a>
+                            <a class="nav-link" href="{{route('pesel')}}">PESEL</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Travel</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="category.html">Asia</a>
-                                <a class="dropdown-item" href="category.html">Europe</a>
-                                <a class="dropdown-item" href="category.html">Dubai</a>
-                                <a class="dropdown-item" href="category.html">Africa</a>
-                                <a class="dropdown-item" href="category.html">South America</a>
-                            </div>
-
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tematy</a>
+                            <a class="nav-link dropdown-toggle" href="{{route('topics', ['id'=>1])}}" id="dropdown05"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tematy</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown05">
                                 @foreach($topics as $topic)
-                                    <a class="dropdown-item" href="category.html">{{$topic->topic}}</a>
-                                    @endforeach
+                                    <a class="dropdown-item"
+                                       href="{{route('topics', ['id'=>$topic->id])}}">{{$topic->topic}}</a>
+                                @endforeach
 
                             </div>
 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('joks')}}">Dowcipy</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('about')}}">O mnie</a>
@@ -136,8 +142,7 @@
     </header>
     <!-- END header -->
 
-@yield('content')
-
+    @yield('content')
 
 
     <footer class="site-footer">
@@ -146,10 +151,12 @@
                 <div class="col-md-4">
                     <h3>O mnie</h3>
                     <p class="mb-4">
-                        <img src="{{asset('storage/'.Auth::user()->main_photo)}}" alt="Image placeholder" class="img-fluid">
+                        <img src="{{asset('storage/'.$user->main_photo)}}" alt="Image placeholder"
+                             class="img-fluid">
                     </p>
 
-                    <p>{!! Str::limit(strip_tags(Auth::user()->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj więcej...</a></p>
+                    <p>{!! Str::limit(strip_tags($user->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj
+                            więcej...</a></p>
                 </div>
                 <div class="col-md-6 ml-auto">
                     <div class="row">
@@ -157,11 +164,13 @@
                             <h3>Ostatnie wpisy</h3>
                             <div class="post-entry-sidebar">
                                 <ul>
+                                    @foreach($lastPosts as $post)
                                     <li>
                                         <a href="">
-                                            <img src="{{asset('images/img_6.jpg')}}" alt="Image placeholder" class="mr-4">
+                                            <img src="{{asset('storage/'.$post->thumbnail)}}" alt="{{$post->title}}"
+                                                 class="mr-4">
                                             <div class="text">
-                                                <h4>How to Find the Video Games of Your Youth</h4>
+                                                <h4>{{$post->title}}</h4>
                                                 <div class="post-meta">
                                                     <span class="mr-2">March 15, 2018 </span> &bullet;
                                                     <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
@@ -169,30 +178,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
-                                            <img src="{{asset('images/img_3.jpg')}}" alt="Image placeholder" class="mr-4">
-                                            <div class="text">
-                                                <h4>How to Find the Video Games of Your Youth</h4>
-                                                <div class="post-meta">
-                                                    <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <img src="images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                                            <div class="text">
-                                                <h4>How to Find the Video Games of Your Youth</h4>
-                                                <div class="post-meta">
-                                                    <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -203,23 +189,27 @@
                             <div class="mb-5">
                                 <h3>Podstrony</h3>
                                 <ul class="list-unstyled">
+                                    <li><a href="{{route('jokes')}}">Dowcipy</a></li>
                                     <li><a href="{{route('about')}}">O mnie</a></li>
-                                    <li><a href="#">Travel</a></li>
-                                    <li><a href="#">Adventure</a></li>
-                                    <li><a href="#">Courses</a></li>
-                                    <li><a href="#">Tematy</a></li>
+                                    <li><a href="{{route('contact')}}">Kontakt</a></li>
+                                    <li><a href="{{route('contact')}}">Kontakt</a></li>
                                 </ul>
                             </div>
 
                             <div class="mb-5">
-                                <h3>Social Media</h3>
+                                <h3>Media Społecznościowe</h3>
                                 <ul class="list-unstyled footer-social">
-                                    <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                                    <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                                    <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                                    <li><a href="#"><span class="fa fa-vimeo"></span> Vimeo</a></li>
-                                    <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
-                                    <li><a href="#"><span class="fa fa-snapchat"></span> Snapshot</a></li>
+                                    @if(!empty($settings->twitter))
+                                        <li><a target="_blank" href="{{url($settings->twitter)}}"><span class="fa fa-twitter"></span> Twitter</a></li>
+                                    @elseif(!empty($settings->fb))
+                                        <li><a target="_blank" href="{{url($settings->fb)}}"><span class="fa fa-facebook"></span> Facebook</a></li>
+                                    @elseif(!empty($settings->yt))
+                                        <li><a target="_blank" href="{{url($settings->yt)}}"><span class="fa fa-youtube-play"></span> Youtube</a></li>
+                                    @endif
+
+{{--                                    <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>--}}
+{{--                                    <li><a href="#"><span class="fa fa-vimeo"></span> Vimeo</a></li>                                    --}}
+{{--                                    <li><a href="#"><span class="fa fa-snapchat"></span> Snapshot</a></li>--}}
                                 </ul>
                             </div>
                         </div>
@@ -230,7 +220,13 @@
                 <div class="col-md-12 text-center">
                     <p class="small">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All Rights Reserved | This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                        Copyright &copy;
+                        <script data-cfasync="false"
+                                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                        <script>document.write(new Date().getFullYear());</script>
+                        All Rights Reserved | This template is made with <i class="fa fa-heart text-danger"
+                                                                            aria-hidden="true"></i> by <a
+                            href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

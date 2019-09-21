@@ -15,7 +15,10 @@
 Route::get('/', 'FrontendController@index');
 Route::get('/o_mnie', 'FrontendController@about')->name('about');
 Route::get('/kontakt', 'FrontendController@contact')->name('contact');
-Route::get('/tematy/{$id}', 'FrontendController@topics')->name('topics');
+Route::get('/tematy/{id}', 'FrontendController@topics')->name('topics');
+Route::get('/artykul/{slug}', 'FrontendController@single')->name('single');
+Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
+Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
 Auth::routes();
 Route::middleware(['auth'])->group(function (){
     Route::get('/home', 'HomeController@index')->name('home');

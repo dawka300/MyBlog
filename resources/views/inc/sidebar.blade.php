@@ -3,7 +3,7 @@
         <form action="#" class="search-form">
             <div class="form-group">
                 <span class="icon fa fa-search"></span>
-                <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+                <input type="text" class="form-control" id="s" placeholder="Wpisz słowo i naciśnij enter">
             </div>
         </form>
     </div>
@@ -26,7 +26,7 @@
     </div>--}}
     <!-- END sidebar-box -->
     <div class="sidebar-box">
-        <h3 class="heading">Popular Posts</h3>
+        <h3 class="heading">Popularne wpisy</h3>
         <div class="post-entry-sidebar">
             <ul>
                 <li>
@@ -82,18 +82,9 @@
     <div class="sidebar-box">
         <h3 class="heading">Tags</h3>
         <ul class="tags">
-            <li><a href="#">Travel</a></li>
-            <li><a href="#">Adventure</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Lifestyle</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Freelancing</a></li>
-            <li><a href="#">Travel</a></li>
-            <li><a href="#">Adventure</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Lifestyle</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Freelancing</a></li>
+            @foreach($tags as $tag)
+            <li><a href="#">{{$tag->tag}}</a></li>
+            @endforeach
         </ul>
     </div>
 </div>
