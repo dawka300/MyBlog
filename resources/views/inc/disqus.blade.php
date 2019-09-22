@@ -1,4 +1,5 @@
 <div id="disqus_thread"></div>
+<script id="dsq-count-scr" src="//local-ajldzmhrqr.disqus.com/count.js" async></script>
 <script>
 
     /**

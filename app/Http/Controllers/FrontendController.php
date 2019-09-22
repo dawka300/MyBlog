@@ -75,6 +75,19 @@ class FrontendController extends Controller
             'markedPosts'=>$this->markedPosts
         ]);
     }
+    public function tags($id){
+        $tag=Tag::find($id);
+        return view('tags', [
+            'tag'=>$tag,
+            'settings'=>$this->settings,
+            'topics'=>$this->topics,
+            'tags'=>$this->tags,
+            'user'=>$this->user,
+            'posts'=>$this->posts,
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
+        ]);
+    }
 
     public function single($slug){
         $post=Post::where('slug',$slug)->first();
@@ -116,6 +129,22 @@ class FrontendController extends Controller
             'posts'=>$this->posts,
             'lastPosts'=>$this->lastPosts,
             'jokes'=>$jokes,
+            'markedPosts'=>$this->markedPosts
+        ]);
+    }
+
+    public function result(Request $request){
+        $results=Post::where('title', 'like', '%'.$request->word.'%')->orWhere('content', 'like', '%'.$request->word.'%')->paginate(8);
+
+        return view('result', [
+            'settings'=>$this->settings,
+            'topics'=>$this->topics,
+            'tags'=>$this->tags,
+            'user'=>$this->user,
+            'posts'=>$this->posts,
+            'lastPosts'=>$this->lastPosts,
+            'results'=>$results,
+            'word'=>$request->word,
             'markedPosts'=>$this->markedPosts
         ]);
     }

@@ -16,6 +16,8 @@ Route::get('/', 'FrontendController@index');
 Route::get('/o_mnie', 'FrontendController@about')->name('about');
 Route::get('/kontakt', 'FrontendController@contact')->name('contact');
 Route::get('/tematy/{id}', 'FrontendController@topics')->name('topics');
+Route::get('/szukaj', 'FrontendController@result')->name('result');
+Route::get('/tagi/{id}', 'FrontendController@tags')->name('tags');
 Route::get('/artykul/{slug}', 'FrontendController@single')->name('single');
 Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');

@@ -11,6 +11,7 @@
             <th>Obrazek</th>
             <th>Temat</th>
             <th>Treść</th>
+            <th>Wyróżniony</th>
             <th>Operacje</th>
         </tr>
         </thead>
@@ -22,6 +23,7 @@
                     <td><img width="120px" height="120px" alt="{{$post->title}}" src="{{asset('storage/'.$post->thumbnail)}}"></td>
                     <td><i>{{$post->title}}</i></td>
                     <td>{!!Str::limit($post->content, 200, '...')!!}</td>
+                    <td>{{$post->marked==1 ? 'Tak' : 'Nie'}}</td>
                     <td><a href="{{route('posts.edit', ['id'=>$post->id])}}" class="btn btn-info">Edytuj</a> </td>
                 </tr>
             @endforeach

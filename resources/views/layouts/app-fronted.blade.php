@@ -82,9 +82,9 @@
                     </div>
                     <div class="col-3 search-top">
                         <!-- <a href="#"><span class="fa fa-search"></span></a> -->
-                        <form action="#" class="search-top-form">
-                            <span class="icon fa fa-search"></span>
-                            <input type="text" id="s" placeholder="Type keyword to search...">
+                        <form action="{{route('result')}}" class="search-top-form" method="get">
+                            <span onclick="$('form.search-top-form').submit()" style="cursor: pointer" class="icon fa fa-search"></span>
+                            <input name="word" type="text" id="s" placeholder="Wpisz sukane słowo...">
                         </form>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                                                 <h4>{{$post->title}}</h4>
                                                 <div class="post-meta">
                                                     <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+{{--                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                                                 </div>
                                             </div>
                                         </a>
@@ -189,9 +189,9 @@
                             <div class="mb-5">
                                 <h3>Podstrony</h3>
                                 <ul class="list-unstyled">
+                                    <li><a href="{{route('pesel')}}">Pesel</a></li>
                                     <li><a href="{{route('jokes')}}">Dowcipy</a></li>
                                     <li><a href="{{route('about')}}">O mnie</a></li>
-                                    <li><a href="{{route('contact')}}">Kontakt</a></li>
                                     <li><a href="{{route('contact')}}">Kontakt</a></li>
                                 </ul>
                             </div>
@@ -243,7 +243,6 @@
 <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
-
 <script src="{{asset('js/main.js')}}"></script>
 
 </body>

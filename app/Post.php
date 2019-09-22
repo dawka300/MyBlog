@@ -12,6 +12,9 @@ class Post extends Model
     protected $fillable=[
         'title', 'content', 'slug', 'user_id', 'topic_id', 'date_public', 'lead', 'meta_desc', 'thumbnail', 'number', 'marked'
     ];
+    protected $dates = [
+        'date_public'
+    ];
 
     public function topic(){
         return $this->belongsTo('\App\Topic');

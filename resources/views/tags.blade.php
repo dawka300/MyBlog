@@ -7,10 +7,10 @@
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="row mb-5 mt-5">
                         <div class="col-md-12 mb-5">
-                            <h2>Temat: {{$topic->topic}}</h2>
+                            <h2>Tag: {{$tag->tag}}</h2>
                         </div>
                     <div class="col-md-12">
-                        @foreach($topic->posts as $post)
+                        @foreach($tag->posts as $post)
                             <div class="post-entry-horzontal">
                                 <a href="{{route('single', ['slug'=>$post->slug])}}">
                                     <div class="image"
@@ -28,7 +28,6 @@
                             </div>
                                 <!-- END post -->
                             @endforeach
-
                         </div>
                     </div>
 

@@ -1,9 +1,9 @@
 <div class="col-md-12 col-lg-4 sidebar">
     <div class="sidebar-box search-form-wrap">
-        <form action="#" class="search-form">
+        <form action="{{route('result')}}" class="search-form" method="get">
             <div class="form-group">
-                <span class="icon fa fa-search"></span>
-                <input type="text" class="form-control" id="s" placeholder="Wpisz słowo i naciśnij enter">
+                <span onclick="$('form.search-form').submit()" style="cursor: pointer" class="icon fa fa-search"></span>
+                <input name="word" type="text" class="form-control" id="s" placeholder="Wpisz słowo i naciśnij enter">
             </div>
         </form>
     </div>
@@ -61,7 +61,7 @@
         <h3 class="heading">Tags</h3>
         <ul class="tags">
             @foreach($tags as $tag)
-            <li><a href="#">{{$tag->tag}}</a></li>
+            <li><a href="{{route('tags', ['id'=>$tag->id])}}">{{$tag->tag}}</a></li>
             @endforeach
         </ul>
     </div>
