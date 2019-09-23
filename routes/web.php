@@ -21,6 +21,8 @@ Route::get('/tagi/{id}', 'FrontendController@tags')->name('tags');
 Route::get('/artykul/{slug}', 'FrontendController@single')->name('single');
 Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
+Route::get('/polityka-cookie', 'FrontendController@cookie')->name('cookie');
+Route::post('/mail', 'FrontendController@send')->name('mail');
 Auth::routes();
 Route::middleware(['auth'])->group(function (){
     Route::get('/home', 'HomeController@index')->name('home');

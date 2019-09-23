@@ -36,7 +36,6 @@
 </head>
 <body>
 <div class="wrap">
-
     <header role="banner">
         <div class="top-bar">
             <div class="container">
@@ -166,7 +165,7 @@
                                 <ul>
                                     @foreach($lastPosts as $post)
                                     <li>
-                                        <a href="">
+                                        <a href="{{route('single', ['slug'=>$post->slug])}}">
                                             <img src="{{asset('storage/'.$post->thumbnail)}}" alt="{{$post->title}}"
                                                  class="mr-4">
                                             <div class="text">

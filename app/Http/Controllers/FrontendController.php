@@ -148,4 +148,25 @@ class FrontendController extends Controller
             'markedPosts'=>$this->markedPosts
         ]);
     }
+
+    public function send(Request $request){
+//        dd($request->all());
+        $this->validate($request,[
+            'name'=>'string|required|max:255|min:3',
+            'phone'=>'nullable|numeric',
+            'email'=>'required|email',
+            'message'=>'required|string|min:5|max:2000'
+        ]);
+    }
+    public function cookie(){
+        return view('cookie', [
+            'settings'=>$this->settings,
+            'topics'=>$this->topics,
+            'tags'=>$this->tags,
+            'user'=>$this->user,
+            'posts'=>$this->posts,
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
+        ]);
+    }
 }
