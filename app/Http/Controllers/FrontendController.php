@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Joke;
+use App\Mail\ContactMail;
 use App\Post;
 use App\Setting;
 use App\Tag;
 use App\Topic;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
@@ -134,7 +137,9 @@ class FrontendController extends Controller
     }
 
     public function result(Request $request){
-        $results=Post::where('title', 'like', '%'.$request->word.'%')->orWhere('content', 'like', '%'.$request->word.'%')->paginate(8);
+        $results=Post::where('title', 'like', '%'.$request->word.'%')
+            ->orWhere('content', 'like', '%'.$request->word.'%')
+            ->paginate(8);
 
         return view('result', [
             'settings'=>$this->settings,
@@ -150,13 +155,28 @@ class FrontendController extends Controller
     }
 
     public function send(Request $request){
-//        dd($request->all());
+
         $this->validate($request,[
             'name'=>'string|required|max:255|min:3',
             'phone'=>'nullable|numeric',
             'email'=>'required|email',
-            'message'=>'required|string|min:5|max:2000'
+            'message'=>'required|string|min:5|max:2000',
+            'rodo' => 'accepted'
         ]);
+
+        $data= [
+          'name'=>$request->name,
+          'phone' => $request->phone,
+          'email' => $request->email,
+          'message' => $request->message
+        ];
+
+        Mail::to('admin@twojsedzia.pl')->send(new ContactMail($data));
+
+        Session::flash('success-mail', 'Poprawnie wysłałeś mail-a');
+
+        return redirect()->route('contact');
+
     }
     public function cookie(){
         return view('cookie', [
