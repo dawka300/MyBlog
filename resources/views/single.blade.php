@@ -11,8 +11,8 @@
                     <div class="post-meta">
                         <span class="author mr-2"><img src="{{asset('storage/'.$postRead->user->tiny_photo)}}"
                                                        alt="Colorlib" class="mr-2">{{$postRead->user->name}}</span>&bullet;
-                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        <span class="mr-2">March 15, 2018 </span>
+{{--                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                     </div>
                     <h1 class="mb-4">{{$postRead->title}}</h1>
                     @foreach($postRead->tags as $tag)

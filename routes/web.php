@@ -23,7 +23,7 @@ Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
 Route::get('/polityka-cookie', 'FrontendController@cookie')->name('cookie');
 Route::post('/mail', 'FrontendController@send')->name('mail');
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('/jokes', 'JokesController');

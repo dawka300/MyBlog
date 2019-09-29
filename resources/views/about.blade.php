@@ -21,13 +21,13 @@
                             @foreach($posts as $post)
 
                         <div class="post-entry-horzontal">
-                            <a href="blog-single.html">
+                            <a href="{{route('single', ['slug'=>$post->slug])}}">
                                 <div class="image" style="background-image: url({{asset('storage/'.$post->lead)}});"></div>
                                 <span class="text">
                                   <div class="post-meta">
                                     <span class="author mr-2"><img src="{{asset('storage/'.$user->tiny_photo)}}" alt="{{$user->name}}"> {{$user->name}}</span>&bullet;
-                                    <span class="mr-2">{{$post->date_public->toformattedDateString()}}</span> &bullet;
-                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                    <span class="mr-2">{{$post->date_public->toformattedDateString()}}</span>
+{{--                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                                   </div>
                                 <h2>{{$post->title}}</h2>
                                 </span>

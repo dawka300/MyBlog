@@ -177,7 +177,7 @@
                                             <div class="text">
                                                 <h4>{{$post->title}}</h4>
                                                 <div class="post-meta">
-                                                    <span class="mr-2">{{$post->date_public->diffForHumans()}}</span> &bullet;
+                                                    <span class="mr-2">{{$post->date_public->diffForHumans()}}</span>
 {{--                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                                                 </div>
                                             </div>

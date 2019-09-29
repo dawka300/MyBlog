@@ -20,8 +20,8 @@
                                 <div class="blog-content-body">
                                     <div class="post-meta">
                                         <span class="author mr-2"><img src="{{asset('storage/'.$post->user->tiny_photo)}}" alt="Colorlib"> {{$post->user->name}}</span>&bullet;
-                                        <span class="mr-2">{{$post->date_public->toFormattedDateString()}}</span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                                        <span class="mr-2">{{$post->date_public->toFormattedDateString()}}</span>
+{{--                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                                     </div>
                                     <h2>{{$post->title}}</h2>
                                 </div>

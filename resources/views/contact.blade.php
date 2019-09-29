@@ -45,7 +45,7 @@
                             <div class="col-md-12">
                             <div class="form-check">
                                 <input type="checkbox" name="rodo" id="rodo" class="form-check-input" required>
-                                <label class="form-check-label" for="rodo">Zapoznałem się z <a href="">klauzulą informacyjną RODO</a></label>
+                                <label class="form-check-label" for="rodo">Zapoznałem się z <a target="_blank" href="{{asset('storage/files/1_dawka300/blog/polityka_rodo.pdf')}}">klauzulą informacyjną RODO</a></label>
 
                             </div>
                             </div>
