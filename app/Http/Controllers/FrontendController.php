@@ -93,10 +93,10 @@ class FrontendController extends Controller
     }
 
     public function single($slug){
-        $post=Post::where('slug',$slug)->first();
+        $postRead=Post::where('slug',$slug)->first();
 
         return view('single', [
-            'post'=>$post,
+            'postRead'=>$postRead,
             'settings'=>$this->settings,
             'topics'=>$this->topics,
             'tags'=>$this->tags,

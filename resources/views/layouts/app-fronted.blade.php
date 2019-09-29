@@ -3,11 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @if(isset($post->meta_desc))
-        <meta name="description" content="{{$post->meta_desc}}">
+    <meta property="og:url"           content="{{url()->current()}}" />
+    <meta property="og:type"          content="website" />
+    @if(isset($postRead))
+        <meta property="og:title"         content="{{$postRead->meta_desc}}" />
+        <meta property="og:description"   content="{{$postRead->meta_desc}}" />
+        <meta property="og:image"         content="{{asset('storage/'.$postRead->lead)}}" />
+        <meta name="description" content="{{$postRead->meta_desc}}">
     @else
+        <meta property="og:title"         content="{{ config('app.name', 'Blogprawo.pl') }}" />
+        <meta property="og:description"   content="Inne spojrzenie na prawo..." />
+        <meta property="og:image"         content="{{asset('storage/photos/1_dawka300/blog-foto/bg33.jpeg')}}" />
         <meta name="description" content="prawo, porady prawne, prawnik, blog prawny, radca prawny, aplikacja radcowska">
     @endif
+
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -140,10 +149,7 @@
         </nav>
     </header>
     <!-- END header -->
-
     @yield('content')
-
-
     <footer class="site-footer">
         <div class="container">
             <div class="row mb-5">
@@ -171,7 +177,7 @@
                                             <div class="text">
                                                 <h4>{{$post->title}}</h4>
                                                 <div class="post-meta">
-                                                    <span class="mr-2">March 15, 2018 </span> &bullet;
+                                                    <span class="mr-2">{{$post->date_public->diffForHumans()}}</span> &bullet;
 {{--                                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                                                 </div>
                                             </div>
