@@ -31,7 +31,7 @@
                        name="main_filepath" {{$user->main_photo ? 'value='.$user->main_photo : null}}>
             </div>
             <img id="holder"
-                 style="margin-top:15px;max-height:250px;"{{$user->main_photo ? 'src=http://localhost/public/storage/'.$user->main_photo : null}} >
+                 style="margin-top:15px;max-height:250px;"{{$user->main_photo ? 'src='.asset('storage/'.$user->main_photo) : null}} >
         </div>
         <div class="col-6">
             <h3 class="text-white">Wybierz portretowe zdjęcie</h3>
@@ -46,7 +46,7 @@
                        name="tiny_filepath" {{$user->tiny_photo ? 'value='.$user->tiny_photo : null}}>
             </div>
             <img id="holder2"
-                 style="margin-top:15px;max-height:250px;"{{$user->tiny_photo ? 'src=http://localhost/public/storage/'.$user->tiny_photo : null}} >
+                 style="margin-top:15px;max-height:250px;"{{$user->tiny_photo ? 'src='.asset('storage/'.$user->tiny_photo) : null}} >
         </div>
     </div>
 

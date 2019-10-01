@@ -16,7 +16,7 @@
                     </div>
                     <h1 class="mb-4">{{$postRead->title}}</h1>
                     @foreach($postRead->tags as $tag)
-                        <a class="category mb-5" href="#">{{$tag->tag}}</a>
+                        <a class="category mb-5" href="{{route('tags', ['id'=>$tag->id])}}">{{$tag->tag}}</a>
                     @endforeach
 
                     <div class="post-content-body">

@@ -10,7 +10,7 @@
                             <h2>Temat: {{$topic->topic}}</h2>
                         </div>
                     <div class="col-md-12">
-                        @foreach($topic->posts as $post)
+                        @foreach($topic->posts->sortByDesc('id') as $post)
                             <div class="post-entry-horzontal">
                                 <a href="{{route('single', ['slug'=>$post->slug])}}">
                                     <div class="image"
@@ -18,8 +18,8 @@
                                     <span class="text">
                           <div class="post-meta">
                             <span class="author mr-2"><img src="{{asset('storage/'.$post->user->tiny_photo)}}"
-                                                           alt="Colorlib"> Colorlib</span>&bullet;
-                            <time datetime="2016-04-17 12:00:00" class="mr-2">{{$post->created_at->toFormattedDateString()}}</time>
+                                                           alt="Colorlib"> {{$post->user->name}}</span>&bullet;
+                            <span class="mr-2">{{$post->date_public->toFormattedDateString()}}</span>
 {{--                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>--}}
                           </div>
                             <h2>{{$post->title}}</h2>

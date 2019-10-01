@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <h1>Dowcipy</h1>
+                    <h1>Krotochwile</h1>
                 </div>
             </div>
             <div class="row blog-entries">

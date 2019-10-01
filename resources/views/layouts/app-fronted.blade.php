@@ -92,7 +92,7 @@
                         <!-- <a href="#"><span class="fa fa-search"></span></a> -->
                         <form action="{{route('result')}}" class="search-top-form" method="get">
                             <span onclick="$('form.search-top-form').submit()" style="cursor: pointer" class="icon fa fa-search"></span>
-                            <input name="word" type="text" id="s" placeholder="Wpisz sukane słowo...">
+                            <input name="word" type="text" id="s" placeholder="Wpisz szukane słowo...">
                         </form>
                     </div>
                 </div>
@@ -119,6 +119,9 @@
                             <a class="nav-link active" href="index.html">Home</a>
                         </li>--}}
                         <li class="nav-item">
+                            <a class="nav-link" href="{{route('jokes')}}">Krotochwile</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{route('pesel')}}">PESEL</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -132,9 +135,6 @@
 
                             </div>
 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('jokes')}}">Dowcipy</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('about')}}">O mnie</a>

@@ -139,7 +139,7 @@ class FrontendController extends Controller
     public function result(Request $request){
         $results=Post::where('title', 'like', '%'.$request->word.'%')
             ->orWhere('content', 'like', '%'.$request->word.'%')
-            ->paginate(8);
+            ->get();
 
         return view('result', [
             'settings'=>$this->settings,

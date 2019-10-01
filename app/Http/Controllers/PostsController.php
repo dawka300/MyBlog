@@ -130,6 +130,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd(strlen(file_get_contents('php://input')));
         $this->validate($request,[
             'title'=>'required|string|min:3',
             'category'=>'required|numeric',
@@ -142,7 +143,6 @@ class PostsController extends Controller
         ]);
 
         if($request->marked){
-//            dd($request->all());
             $marked=1;
         }else{
             $marked=0;
