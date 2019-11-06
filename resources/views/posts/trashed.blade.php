@@ -3,7 +3,6 @@
 
 
 @section('content')
-    <a href="{{route('posts.create')}}" class="btn btn-primary">Dodaj wpis</a>
     <table class="table table-dark mt-4">
         <thead>
         <tr>
@@ -26,10 +25,10 @@
                     <td>{{$post->marked==1 ? 'Tak' : 'Nie'}}</td>
                     <td><a href="{{route('posts.edit', ['id'=>$post->id])}}" class="btn btn-info">Edytuj</a>
                         <br>
-                        <form action="{{action('PostsController@destroy', ['id'=>$post->id])}}" method="post">
-                           @method('delete')
+                        <form action="{{action('PostsController@delete', ['id'=>$post->id])}}" method="post">
+                            @method('delete')
                             @csrf
-                           <button onclick="return confirm('Czy chcesz przenieśc do kosza wpis?')" class="btn btn-danger" type="submit">Usuń</button>
+                            <button onclick="return confirm('Czy chcesz całkowicie usunąć wpis?')" class="btn btn-danger" type="submit">Usuń</button>
                         </form>
                     </td>
                 </tr>

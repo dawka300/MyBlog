@@ -136,7 +136,7 @@ class PostsController extends Controller
             'category'=>'required|numeric',
             'tags'=>'required',
             'content'=>'string|min:20',
-            'meta_desc'=>'nullable|string',
+            'meta_desc'=>'required|string',
             'lead'=>'string|required',
             'date_public'=>'date|required',
             'number'=>'numeric|required'
@@ -181,11 +181,31 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post=Post::find($id);
+        $post->delete();
+        toastSuccess('Właśnie przesniosłeś do kosza post');
+
+        return back();
+    }
+    public function delete($id){
+        $post= Post::withTrashed()->where('id', $id)->first();
+        $post->forceDelete();
+        toastSuccess('Całkowicie usnąłeś posta');
+
+        return redirect()->route('trashed');
     }
 
-    public function trash($id)
+    public function trashed()
     {
-        $post=Post::find($id);
+        $posts=Post::onlyTrashed()->get();
+        return view('posts.trashed', ['posts'=>$posts]);
+
+    }
+    public function restore($id){
+        $post=Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+        toastSuccess('Post jest znowu widoczny');
+
+        return back();
     }
 }

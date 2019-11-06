@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="google-site-verification" content="65RScv31l4FFSxvexxcUWukwcAi9XUXfWrb70mf2kx4" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -84,7 +84,7 @@ echo phpinfo();
                         <li class="list-group-item list-group-item-dark"><a href="{{route('settings')}}">Ustawienia</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('user')}}">Użytkownik</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('posts.index')}}">Wpisy</a></li>
-                        <li class="list-group-item list-group-item-dark"><a href="{{route('user')}}">Wpisy w koszu</a></li>
+                        <li class="list-group-item list-group-item-dark"><a href="{{route('trashed')}}">Wpisy w koszu</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('topics.index')}}">Tematy</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('tags.index')}}">Tagi</a></li>
                         <li class="list-group-item list-group-item-dark"><a href="{{route('jokes.index')}}">Dowcipy</a></li>

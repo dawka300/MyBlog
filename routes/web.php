@@ -11,7 +11,12 @@
 |
 */
 
+Route::get('/symlink', function (){
+    $exitCode=Artisan::call('storage:link');
+    echo $exitCode;
 
+
+});
 Route::get('/', 'FrontendController@index');
 Route::get('/o_mnie', 'FrontendController@about')->name('about');
 Route::get('/kontakt', 'FrontendController@contact')->name('contact');
@@ -30,6 +35,9 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('/topics', 'TopicsController');
     Route::resource('/tags', 'TagsController');
     Route::resource('/posts', 'PostsController');
+    Route::get('/trashed', 'PostsController@trashed')->name('trashed');
+    Route::delete('/trashed/{id}', 'PostsController@delete')->name('trashed-delete');
+    Route::post('/restore/{id}', 'PostsController@restore')->name('trashed-restore');
     Route::get('/settings', 'SettingsController@index')->name('settings');
     Route::put('/settings', 'SettingsController@store')->name('change_settings');
     Route::get('/files', 'BackendPagesController@file')->name('file');

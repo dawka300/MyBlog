@@ -18,7 +18,7 @@
         <button class="btn btn-outline-danger" type="button" onclick="window.location.href='https://google.com'">{{ trans('cookieConsent::texts.disagree') }}</button>
     </div>
 </div>
-<style>
+{{--<style>
     .cookie {
         background-color: #020101;
         opacity: 0.7;
@@ -28,4 +28,4 @@
         top: 0;
         z-index: 99;
     }
-</style>
+</style>--}}

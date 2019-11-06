@@ -25,7 +25,7 @@ class FrontendController extends Controller
         $this->user=User::where('id', 1)->first();
         $this->lastPosts=Post::withoutTrashed()->orderBy('id', 'desc')->take(3)->get();
         $this->posts=Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
-        $this->markedPosts=Post::withoutTrashed()->where('marked', 1)->get();
+        $this->markedPosts=Post::withoutTrashed()->where('marked', 1)->orderBy('id', 'desc')->get();
     }
 
     public function index(){
@@ -163,6 +163,12 @@ class FrontendController extends Controller
             'message'=>'required|string|min:5|max:2000',
             'rodo' => 'accepted'
         ]);
+        $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . env('GOOGLE_RECAPTCHA_SECRET') . '&response=' . $_POST['g-recaptcha-response']);
+        $response = json_decode($check);
+        if ($response===false){
+            Session::flash('fail-mail', 'Nie wysłałeś mail-a. błąd z captchą');
+            return redirect()->route('contact');
+        }
 
         $data= [
           'name'=>$request->name,

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="65RScv31l4FFSxvexxcUWukwcAi9XUXfWrb70mf2kx4" />
     <meta property="og:url"           content="{{url()->current()}}" />
     <meta property="og:type"          content="website" />
     @if(isset($postRead))
@@ -92,7 +93,7 @@
                         <!-- <a href="#"><span class="fa fa-search"></span></a> -->
                         <form action="{{route('result')}}" class="search-top-form" method="get">
                             <span onclick="$('form.search-top-form').submit()" style="cursor: pointer" class="icon fa fa-search"></span>
-                            <input name="word" type="text" id="s" placeholder="Wpisz szukane słowo...">
+                            <input name="word" type="text" id="s0" placeholder="Wpisz szukane słowo...">
                         </form>
                     </div>
                 </div>
@@ -160,7 +161,7 @@
                              class="img-fluid">
                     </p>
 
-                    <p>{!! Str::limit(strip_tags($user->about), 150, '...')!!} <a href="{{route('about')}}">Czytaj
+                    <p>{!! Str::limit(strip_tags($user->about), 140, '...')!!} <a href="{{route('about')}}">Czytaj
                             więcej...</a></p>
                 </div>
                 <div class="col-md-6 ml-auto">
@@ -195,7 +196,7 @@
                                 <h3>Podstrony</h3>
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('pesel')}}">Pesel</a></li>
-                                    <li><a href="{{route('jokes')}}">Dowcipy</a></li>
+                                    <li><a href="{{route('jokes')}}">Krotochwile</a></li>
                                     <li><a href="{{route('about')}}">O mnie</a></li>
                                     <li><a href="{{route('contact')}}">Kontakt</a></li>
                                 </ul>
@@ -249,6 +250,7 @@
 <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/MyJs.js')}}"></script>
 
 </body>
 </html>
