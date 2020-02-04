@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Session;
 class FrontendController extends Controller
 {
     protected $settings, $topics, $tags, $user, $lastPosts, $posts, $markedPosts;
-    /* tu jest funkcja constRuct - testy z wykorzystaniem rebaSe*/
+    /* tu jest funkcja constRUct - testy z wykorzystaNiem rebase*/
     public function __construct()
     {
         $this->settings=Setting::first();
