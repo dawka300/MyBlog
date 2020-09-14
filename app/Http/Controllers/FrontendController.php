@@ -10,22 +10,33 @@ use App\Tag;
 use App\Topic;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
     protected $settings, $topics, $tags, $user, $lastPosts, $posts, $markedPosts;
-    /* tu jest funkcja constRUct - testy z wykorzystaNiem rebase*/
+
+    protected $timeOfCache = 480;
+
     public function __construct()
     {
-        $this->settings=Setting::first();
-        $this->topics=Topic::all();
-        $this->tags=Tag::all();
-        $this->user=User::where('id', 1)->first();
-        $this->lastPosts=Post::withoutTrashed()->orderBy('id', 'desc')->take(3)->get();
-        $this->posts=Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
-        $this->markedPosts=Post::withoutTrashed()->where('marked', 1)->orderBy('id', 'desc')->get();
+        $this->settings = Setting::first();
+        $this->topics = Topic::all();
+        $this->tags = Tag::all();
+        $this->user = Cache::remember('user', $this->timeOfCache, function (){
+            return User::where('id', 1)->first();
+        });
+        $this->lastPosts = Cache::remember('lastPosts', $this->timeOfCache, function (){
+            return Post::withoutTrashed()->orderBy('id', 'desc')->take(3)->get();
+        });
+        $this->posts = Cache::remember('posts', $this->timeOfCache, function (){
+           return  Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
+        });
+        $this->markedPosts = Cache::remember('markedPosts', $this->timeOfCache, function (){
+           return Post::withoutTrashed()->where('marked', 1)->orderBy('id', 'desc')->get();
+        });
     }
 
     public function index(){
