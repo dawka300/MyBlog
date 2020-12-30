@@ -31,9 +31,10 @@ class FrontendController extends Controller
         $this->lastPosts = Cache::remember('lastPosts', $this->timeOfCache, function (){
             return Post::withoutTrashed()->orderBy('id', 'desc')->take(3)->get();
         });
-        $this->posts = Cache::remember('posts', $this->timeOfCache, function (){
+       /* $this->posts = Cache::remember('posts', $this->timeOfCache, function (){
            return  Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
-        });
+        });*/
+        $this->posts = Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
         $this->markedPosts = Cache::remember('markedPosts', $this->timeOfCache, function (){
            return Post::withoutTrashed()->where('marked', 1)->orderBy('id', 'desc')->get();
         });
