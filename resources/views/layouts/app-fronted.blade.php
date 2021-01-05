@@ -123,8 +123,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('jokes')}}">Krotochwile</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('pesel')}}">PESEL</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdown05"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">Dodatki</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown05">
+                                    <a class="dropdown-item" href="{{route('pesel')}}">PESEL</a>
+                                    <a class="dropdown-item" href="{{route('nip')}}">NIP</a>
+
+                            </div>
+
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{route('topics', ['id'=>1])}}" id="dropdown05"

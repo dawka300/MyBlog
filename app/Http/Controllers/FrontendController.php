@@ -207,4 +207,16 @@ class FrontendController extends Controller
             'markedPosts'=>$this->markedPosts
         ]);
     }
+
+    public function nip() {
+        return view('nip', [
+        'settings'=>$this->settings,
+            'topics'=>$this->topics,
+            'tags'=>$this->tags,
+            'user'=>$this->user,
+            'posts'=>$this->posts,
+            'lastPosts'=>$this->lastPosts,
+            'markedPosts'=>$this->markedPosts
+        ]);
+    }
 }
