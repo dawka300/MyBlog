@@ -10,7 +10,7 @@ class RecaptchaHelper {
     public $secrect;
     public $postValue;
 
-    public function __construct(string $string){
+    public function __construct(?string $string){
         $this->secrect = env('GOOGLE_RECAPTCHA_SECRET');
         $this->postValue = $string;
     }
@@ -19,7 +19,7 @@ class RecaptchaHelper {
         $checkUrl = Str::replaceArray('??', [$this->secrect, $this->postValue], $this->url);
         $response = json_decode(file_get_contents($checkUrl));
 
-        return $response;
+        return $response->success;
     }
 
     /**

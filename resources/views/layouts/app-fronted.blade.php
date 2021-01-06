@@ -251,7 +251,7 @@
 <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
-<script src="{{asset('js/MyJs.js')}}"></script>
+{{--<script src="{{asset('js/MyJs.js')}}"></script>--}}
 
 </body>
 </html>
