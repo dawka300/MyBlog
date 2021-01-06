@@ -19,7 +19,8 @@
         "spatie/laravel-cookie-consent": "^2.9",
         "unisharp/laravel-ckeditor": "^4.7",
         "unisharp/laravel-filemanager": "dev-master",
-        "yoeunes/toastr": "^1.2"
+        "yoeunes/toastr": "^1.2",
+        "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
