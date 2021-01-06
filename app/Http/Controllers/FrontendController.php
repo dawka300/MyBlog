@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RecaptchaHelper;
 use App\Joke;
 use App\Mail\ContactMail;
 use App\Post;
@@ -176,9 +177,9 @@ class FrontendController extends Controller
             'message'=>'required|string|min:5|max:2000',
             'rodo' => 'accepted'
         ]);
-        $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . env('GOOGLE_RECAPTCHA_SECRET') . '&response=' . $_POST['g-recaptcha-response']);
-        $response = json_decode($check);
-        if ($response===false){
+
+        $response = new RecaptchaHelper($request->get('g-recaptcha-response'));
+        if ($response->check() === false){
             Session::flash('fail-mail', 'Nie wysłałeś mail-a. błąd z captchą');
             return redirect()->route('contact');
         }
