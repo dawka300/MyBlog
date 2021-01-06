@@ -9,6 +9,7 @@ use App\Setting;
 use App\Tag;
 use App\Topic;
 use App\User;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
@@ -209,6 +210,9 @@ class FrontendController extends Controller
     }
 
     public function nip() {
+        $soap = new SoapWrapper();
+        dd($soap);
+        $soap2 = new \SoapClient();
         return view('nip', [
         'settings'=>$this->settings,
             'topics'=>$this->topics,
