@@ -26,6 +26,7 @@ Route::get('/tagi/{id}', 'FrontendController@tags')->name('tags');
 Route::get('/artykul/{slug}', 'FrontendController@single')->name('single');
 Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
 Route::get('/nip', 'FrontendController@nip')->name('nip');
+Route::post('/ajax-nip', 'FrontendController@ajaxGus')->name('ajax_nip');
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
 Route::get('/polityka-cookie', 'FrontendController@cookie')->name('cookie');
 Route::post('/mail', 'FrontendController@send')->name('mail');
