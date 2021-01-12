@@ -211,9 +211,12 @@ class FrontendController extends Controller
     }
 
     public function nip() {
-        $soap = new SoapWrapper();
-        dd($soap);
-        $soap2 = new \SoapClient();
+//        $test = new GusHelper();
+//        $test2 = $test->search(['regon' => '', 'nip' => '', 'krs' =>  ]);
+//        dd($test2);
+
+
+
         return view('nip', [
         'settings'=>$this->settings,
             'topics'=>$this->topics,

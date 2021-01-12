@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <h1>Program NIP</h1>
+                    <h1>Pobieranie danych z GUS na temat przedsiebiorców</h1>
                 </div>
             </div>
             <div class="row blog-entries">

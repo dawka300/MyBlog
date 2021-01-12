@@ -128,7 +128,7 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">Dodatki</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown05">
                                     <a class="dropdown-item" href="{{route('pesel')}}">PESEL</a>
-{{--                                    <a class="dropdown-item" href="{{route('nip')}}">NIP</a>--}}
+                                    <a class="dropdown-item" href="{{route('gus')}}">Dane GUS</a>
 
                             </div>
 
