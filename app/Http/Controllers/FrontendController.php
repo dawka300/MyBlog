@@ -10,11 +10,17 @@ use App\Setting;
 use App\Tag;
 use App\Topic;
 use App\User;
-use Artisaninweb\SoapWrapper\SoapWrapper;
+use App\Helpers\GusHelper;
+use DateTimeImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use GusApi\BulkReportTypes;
+use GusApi\Exception\InvalidUserKeyException;
+use GusApi\Exception\NotFoundException;
+use GusApi\GusApi;
+use GusApi\ReportTypes;
 
 class FrontendController extends Controller
 {
@@ -226,5 +232,17 @@ class FrontendController extends Controller
             'lastPosts'=>$this->lastPosts,
             'markedPosts'=>$this->markedPosts
         ]);
+    }
+
+    public function ajaxGus(Request $request){
+
+        $this->validate($request, [
+           'nip' => 'nullable|numeric',
+           'regon' => 'nullable|numeric',
+           'krs' => 'nullable|numeric'
+        ]);
+        $api = new GusHelper();
+        $apiResponse = $api->search($request->all());
+        return response()->json(['response' => $apiResponse]);
     }
 }
