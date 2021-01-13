@@ -104,8 +104,12 @@
                                         success: function (data){
                                             that.clearFields();
                                             let basic = data.response.basic;
-                                            let report = data.response.report;
-                                            console.log(report);
+                                            let report = data.response.report[0];
+                                            let button = '';
+                                            if(typeof report.ErrorCode === 'undefined'){
+                                                button = '<a class="btn btn-outline-primary" target="_blank" href="{{route('ajax_gus_pdf')}}">Pobierz raport</a>'
+                                            }
+                                            // console.log(typeof report.ErrorCode === 'undefined' );
                                             $('#display')
                                                 .html(`
                                                     <p class="mt-3"><b>Nazwa:</b> ${basic.name}</p><p><b>Województwo:</b> ${basic.province}</p>
@@ -114,7 +118,7 @@
                                                     <p><b>Ulica:</b> ${basic.street}</p><p><b>Numer budynku::</b> ${basic.propertyNumber}</p>
                                                     <p><b>Regon:</b> ${basic.regon}</p><p><b>Regon 14:</b> ${basic.regon14}</p>
                                                     <p><b>Nip:</b> ${basic.nip}</p><p><b>Status NIP:</b> ${basic.nipStatus}</p>
-                                                    <p><b>Data zakończenia działaności:</b> ${basic.activityEnd}</p>
+                                                    <p><b>Data zakończenia działaności:</b> ${basic.activityEnd}</p>${button}
                                                     `);
                                         },
                                         fail: function (data){
