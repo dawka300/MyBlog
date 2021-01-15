@@ -246,6 +246,19 @@ class FrontendController extends Controller
         ]);
     }
 
+    public function krs()
+    {
+        return view('krs', [
+            'settings' => $this->settings,
+            'topics' => $this->topics,
+            'tags' => $this->tags,
+            'user' => $this->user,
+            'posts' => $this->posts,
+            'lastPosts' => $this->lastPosts,
+            'markedPosts' => $this->markedPosts
+        ]);
+    }
+
     public function ajaxGus(Request $request, $pdf = null)
     {
 

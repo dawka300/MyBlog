@@ -26,6 +26,7 @@ Route::get('/tagi/{id}', 'FrontendController@tags')->name('tags');
 Route::get('/artykul/{slug}', 'FrontendController@single')->name('single');
 Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
 Route::get('/gus', 'FrontendController@gus')->name('gus');
+Route::get('/krs', 'FrontendController@krs')->name('krs');
 Route::post('/ajax-gus', 'FrontendController@ajaxGus')->name('ajax_gus');
 Route::get('/ajax-gus/pdf', 'FrontendController@ajaxGusPdf')->name('ajax_gus_pdf');
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');

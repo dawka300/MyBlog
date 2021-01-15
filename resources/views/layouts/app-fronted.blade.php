@@ -129,6 +129,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdown05">
                                     <a class="dropdown-item" href="{{route('pesel')}}">PESEL</a>
                                     <a class="dropdown-item" href="{{route('gus')}}">Dane GUS</a>
+                                    <a class="dropdown-item" href="{{route('krs')}}">Dane KRS</a>
 
                             </div>
 
