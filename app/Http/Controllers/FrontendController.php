@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GuzzleHelper;
 use App\Helpers\RecaptchaHelper;
 use App\Joke;
 use App\Mail\ContactMail;
@@ -248,6 +249,10 @@ class FrontendController extends Controller
 
     public function krs()
     {
+        $clientHttp = new GuzzleHelper();
+        $response = $clientHttp->search(['nip' => '', 'regon' => '', 'krs' => ['number' => '0000305178', 'type' => null,]]);
+//        $response = $clientHttp->getByKrs('759281');
+        dd($response);
         return view('krs', [
             'settings' => $this->settings,
             'topics' => $this->topics,
