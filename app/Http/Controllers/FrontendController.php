@@ -249,8 +249,9 @@ class FrontendController extends Controller
 
     public function krs()
     {
-//        $clientHttp = new KrsHelper();
-//        $response = $clientHttp->search(['nip' => '7133100359', 'regon' => '', 'krs' => ['number' => '0000305178', 'type' => 'entries',]]);
+        $clientHttp = new KrsHelper();
+        $response = $clientHttp->search(['nip' => '7133100359', 'regon' => '',
+            'krs' => ['number' => '0000305178', 'type' => ['entries' => null, 'relations' => null, 'regular' => null]]]);
 //        $response = $clientHttp->getByKrs('759281');
 //        dd($response);
         return view('krs', [
@@ -279,7 +280,7 @@ class FrontendController extends Controller
         }
         $api = new GusHelper();
         $apiResponse = $api->search($request->all());
-        \session(['report' => $apiResponse['report'][0]]);
+        \session(['report_gus' => $apiResponse['report'][0]]);
 
         return response()->json(['response' => $apiResponse]);
 
@@ -287,13 +288,13 @@ class FrontendController extends Controller
 
     public function ajaxGusPdf()
     {
-        if (empty(\session('report'))) {
+        if (empty(\session('report_gus'))) {
 
             return '<h1>Błąd - brak raportu</h1>';
         } else {
-            $pdfPrint = PDF::loadView('pdf.pdf', ['reports' => \session('report')]);
+            $pdfPrint = PDF::loadView('pdf.pdf_gus', ['reports' => \session('report_gus')]);
 
-            return $pdfPrint->download('report.pdf');
+            return $pdfPrint->download('report_gus.pdf');
         }
 
     }
