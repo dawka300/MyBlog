@@ -158,6 +158,8 @@
                                 let recaptchaResponse = grecaptcha.getResponse();
                                 if (recaptchaResponse.length === 0) {
                                     alert('Zaznacz pole z Catpchą');
+
+                                    return false;
                                 }
                                 let name = this.editField.attr('name');
                                 let value = this.editField.val().toString();
