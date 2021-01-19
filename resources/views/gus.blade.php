@@ -68,7 +68,7 @@
                                 var that = this;
                                 for (let item in this.form) {
                                     $('#' + this.form[item]).on('change keyup', function() {
-                                        if($(this).val() > 0) {
+                                        if($(this).val().length > 0) {
                                             that.editField = $(this);
                                             that.onDisable($(this).attr('name'));
                                         }else {
