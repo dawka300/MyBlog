@@ -250,7 +250,7 @@ class FrontendController extends Controller
     public function krs()
     {
         $clientHttp = new GuzzleHelper();
-        $response = $clientHttp->search(['nip' => '', 'regon' => '', 'krs' => ['number' => '0000305178', 'type' => null,]]);
+        $response = $clientHttp->search(['nip' => '7133100359', 'regon' => '', 'krs' => ['number' => '0000305178', 'type' => 'entries',]]);
 //        $response = $clientHttp->getByKrs('759281');
         dd($response);
         return view('krs', [
@@ -272,6 +272,11 @@ class FrontendController extends Controller
             'regon' => 'nullable|numeric',
             'krs' => 'nullable|numeric'
         ]);
+        $response = new RecaptchaHelper($request->get('g-recaptcha-response'));
+        if ($response->check() === false) {
+            $result['error'] = 'Zaznacz pole z recaptcha!';
+            return response()->json(['response' => $result]);
+        }
         $api = new GusHelper();
         $apiResponse = $api->search($request->all());
         \session(['report' => $apiResponse['report'][0]]);

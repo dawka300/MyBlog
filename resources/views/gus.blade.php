@@ -12,6 +12,8 @@
                 <div class="col-md-12 col-lg-8 main-content">
                   <p>Aplikacja służy do pobierania danych z GUS. Należy podać numer NIP lub REGON albo KRS (w przypadku osoby prawnej będzie możliwy
                       do pobrania szczegółowy raport).</p>
+                    <p class="small">Aplikacja jest ciągle rozwijana. Jeżeli mają Państwo jakieś uwagi lub sugestie, proszę kierować
+                        je na mail-a - bedę bardzo wdzięczny.</p>
                 <form action="">
                     <div class="row">
                         <div class="form-group col-5">
@@ -31,6 +33,8 @@
                             <input type="number" name="krs" id="krs" min="0" class="form-control">
                         </div>
                     </div>
+                    <div style="margin-top: 10px;" class="g-recaptcha"
+                         data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}"></div>
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <input id="check" type="button" value="Szukaj" class="btn btn-primary">
@@ -102,16 +106,19 @@
                                         url: '{{route('ajax_gus')}}',
                                         data: {nip: $('#nip').val(), regon: $('#regon').val(), krs: $('#krs').val()},
                                         success: function (data){
-                                            that.clearFields();
-                                            let basic = data.response.basic;
-                                            let report = data.response.report[0];
-                                            let button = '';
-                                            if(typeof report.ErrorCode === 'undefined'){
-                                                button = '<a class="btn btn-outline-primary" target="_blank" href="{{route('ajax_gus_pdf')}}">Pobierz raport</a>'
-                                            }
-                                            // console.log(typeof report.ErrorCode === 'undefined' );
-                                            $('#display')
-                                                .html(`
+                                            if (data.response.error) {
+                                                alert(data.response.error);
+                                            }else {
+                                                that.clearFields();
+                                                let basic = data.response.basic;
+                                                let report = data.response.report[0];
+                                                let button = '';
+                                                if (typeof report.ErrorCode === 'undefined') {
+                                                    button = '<a class="btn btn-outline-primary" target="_blank" href="{{route('ajax_gus_pdf')}}">Pobierz raport</a>'
+                                                }
+                                                // console.log(typeof report.ErrorCode === 'undefined' );
+                                                $('#display')
+                                                    .html(`
                                                     <p class="mt-3"><b>Nazwa:</b> ${basic.name}</p><p><b>Województwo:</b> ${basic.province}</p>
                                                     <p><b>Powiat:</b> ${basic.district}</p><p><b>Gmina:</b> ${basic.community}</p>
                                                     <p><b>Miasto:</b> ${basic.city}</p><p><b>Kod pocztowy:</b> ${basic.zip}</p>
@@ -120,6 +127,7 @@
                                                     <p><b>Nip:</b> ${basic.nip}</p><p><b>Status NIP:</b> ${basic.nipStatus}</p>
                                                     <p><b>Data zakończenia działaności:</b> ${basic.activityEnd}</p>${button}
                                                     `);
+                                            }
                                         },
                                         fail: function (data){
                                             console.log('failed');
@@ -135,6 +143,10 @@
 
                                     return false;
                                 }
+                                // let response = grecaptcha.getResponse();
+                                // if (response.length === 0) {
+                                //     alert('Zaznacz pole z Catpchą');
+                                // }
                                 let name = this.editField.attr('name');
                                 let value = this.editField.val().toString();
                                 if((name === 'nip' || name === 'krs') && value.length !== 10){
