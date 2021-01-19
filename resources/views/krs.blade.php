@@ -1,6 +1,7 @@
 @extends('layouts.app-fronted')
 
 @section('content')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <section class="site-section">
         <div class="container">
             <div class="row mb-4">
@@ -10,8 +11,11 @@
             </div>
             <div class="row blog-entries">
                 <div class="col-md-12 col-lg-8 main-content">
-                  <p>Aplikacja służy do pobierania danych z Krajowego rejestru Sądowego. Należy podać numer NIP lub REGON albo KRS.</p>
-                <form action="">
+                  <p>Aplikacja służy do pobierania danych z Krajowego Rejestru Sądowego. Należy podać numer NIP lub REGON albo KRS.
+                  W przypadku wpisaniu numeru KRS są do wyboru dodatkowe opcje.</p>
+                    <p class="small">Aplikacja jest ciągle rozwijana. Jeżeli mają Państwo jakieś uwagi lub sugestie, proszę kierować
+                        je na mail-a - bedę bardzo wdzięczny.</p>
+                <form action="" id="krs">
                     <div class="row">
                         <div class="form-group col-5">
                             <label for="nip">Numer NIP</label>
@@ -31,8 +35,47 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-5">
+                            <p>Dodatkowe opcje:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                    Normalny raport
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Wszystkie wpisy
+                                    <i class="fa fa-info-circle" style="cursor: pointer;" data-toggle="tooltip"
+                                       data-placement="right"
+                                       title="Tooltip on right"></i>
+                                </label>
+                            </div>
+                            <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                <label class="form-check-label" for="gridRadios3">
+                                    Powiązania z osobami
+                                    <i class="fa fa-info-circle" style="cursor: pointer;"
+                                       data-toggle="tooltip" data-placement="right"
+                                       title="Tooltip on right"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 col-xl-5">
+                            <div  class="g-recaptcha mt-4 mb-4"
+                                  data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}"></div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 form-group">
-                            <input id="check" type="button" value="Szukaj" class="btn btn-primary">
+                            <input id="check" type="submit" value="Szukaj" class="btn btn-primary">
                         </div>
                     </div>
                 </form>
@@ -42,15 +85,16 @@
                 </div>
                 <script>
                     $(function(){
+                        $('[data-toggle="tooltip"]').tooltip()
                         let form = {
                             form: ['nip', 'regon', 'krs'],
-                            submitButton: $('#check'),
+                            submitForm: $('#krs'),
                             messageNipKrs: 'Pole może składać się wyłącznie z 10 cyfr',
                             messageRegon: 'Pole może składać się wyłącznie z 9 cyfr',
                             editField: null,
                             onInit: function (){
                                 this.addEvents();
-                                this.submitButton.click((e) => {
+                                this.submitForm.submit((e) => {
                                     this.submit(e);
                                 });
                             },
@@ -121,7 +165,7 @@
                                                     `);
                                         },
                                         fail: function (data){
-                                            console.log('failed');
+                                            alert('Błąd z aplikacją. Spróbuj później');
                                         }
                                     })
                                 };

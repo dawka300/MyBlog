@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\Helpers\Construction\AbstractApiHelper;
 use DateTimeImmutable;
 use GusApi\BulkReportTypes;
 use GusApi\Exception\InvalidUserKeyException;
@@ -9,10 +10,7 @@ use GusApi\GusApi;
 use GusApi\ReportTypes;
 use GusApi\SearchReport;
 
-class GusHelper {
-    const NIP = 'nip';
-    const REGON = 'regon';
-    const KRS = 'krs';
+class GusHelper extends AbstractApiHelper {
 
     protected $key;
     protected $GusApi = null;
