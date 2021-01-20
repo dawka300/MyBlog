@@ -249,9 +249,9 @@ class FrontendController extends Controller
 
     public function krs()
     {
-        $clientHttp = new KrsHelper();
-        $response = $clientHttp->search(['nip' => '7133100359', 'regon' => '',
-            'krs' => ['number' => '0000305178', 'type' => ['entries' => null, 'relations' => null, 'regular' => null]]]);
+//        $clientHttp = new KrsHelper();
+//        $response = $clientHttp->search(['nip' => '', 'regon' => '',
+//            'krs' => ['number' => '0000305178', 'type' => 'entries']]);
 //        $response = $clientHttp->getByKrs('759281');
 //        dd($response);
         return view('krs', [
@@ -265,7 +265,7 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function ajaxGus(Request $request, $pdf = null)
+    public function ajaxGus(Request $request)
     {
 
         $this->validate($request, [
@@ -296,6 +296,27 @@ class FrontendController extends Controller
 
             return $pdfPrint->download('report_gus.pdf');
         }
+
+    }
+    public function ajaxKrs(Request $request)
+    {
+
+        $this->validate($request, [
+            'nip' => 'nullable|numeric',
+            'regon' => 'nullable|numeric',
+            'krs.number' => 'nullable|numeric',
+            'krs.type' => 'nullable|string'
+        ]);
+//        $response = new RecaptchaHelper($request->get('g_recaptcha_response'));
+//        if ($response->check() === false) {
+//            $result['error'] = 'Zaznacz pole z recaptcha!';
+//            return response()->json(['response' => $result]);
+//        }
+        $api = new KrsHelper();
+        $apiResponse = $api->search($request->all());
+//        \session(['report_krs' => $apiResponse['report'][0]]);
+
+        return response()->json(['response' => $apiResponse]);
 
     }
 

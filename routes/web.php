@@ -28,6 +28,7 @@ Route::get('/pesel', 'FrontendController@pesel')->name('pesel');
 Route::get('/gus', 'FrontendController@gus')->name('gus');
 Route::get('/krs', 'FrontendController@krs')->name('krs');
 Route::post('/ajax-gus', 'FrontendController@ajaxGus')->name('ajax_gus');
+Route::post('/ajax-krs', 'FrontendController@ajaxKrs')->name('ajax_krs');
 Route::get('/ajax-gus/pdf', 'FrontendController@ajaxGusPdf')->name('ajax_gus_pdf');
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
 Route::get('/polityka-cookie', 'FrontendController@cookie')->name('cookie');

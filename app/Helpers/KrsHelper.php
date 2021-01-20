@@ -9,8 +9,12 @@ use App\Helpers\Construction\AbstractApiHelper;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 
-class GuzzleHelper {
+class KrsHelper extends AbstractApiHelper {
+
+
     private $base_url = 'https://rejestr.io';
+    private $message_error = 'Błedna wartość';
+
     private $clientHttp;
 
     public function __construct()
@@ -26,11 +30,12 @@ class GuzzleHelper {
 
     public function search(array $request) {
         foreach ($request as $key => $value) {
-            if(!empty($value) && $key !== 'krs') {
+            if(!empty($value) && $key !== self::KRS && in_array($key, self::AVAILABLE_VALUES)) {
                 return $this->getDataByQuery($key, (string)$value);
-            }elseif(!empty($value) && $key === 'krs') {
+            }elseif(!empty($value) && $key === self::KRS) {
                 $number = (int)$value['number'];
-                switch($value['type']){
+
+                switch ($value['type']) {
                     case 'relations':
                         return $this->getRelations((string)$number);
                     case 'entries':
@@ -38,8 +43,9 @@ class GuzzleHelper {
                     default:
                         return $this->getByKrs((string)$value['number']);
                 }
-            }else {
-                $message['error'] = 'Nie ma takiego pola';
+
+            }elseif(!in_array($key, self::AVAILABLE_VALUES)) {
+                $message['error'] = $this->message_error;
 
                 return $message;
             }
