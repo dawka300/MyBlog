@@ -99,9 +99,7 @@
                                 e.preventDefault();
                                 var that = this;
 
-                                if(!this.validate()){
-                                    this.clearFields();
-                                }else{
+                               if(this.validate()){
                                     $.ajaxSetup({
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -121,6 +119,7 @@
                                                 alert(data.response.error);
                                             }else {
                                                 that.clearFields();
+                                                grecaptcha.reset();
                                                 let basic = data.response.basic;
                                                 let report = data.response.report[0];
                                                 let button = '';
