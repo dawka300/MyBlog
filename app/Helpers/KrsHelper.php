@@ -13,7 +13,7 @@ class KrsHelper extends AbstractApiHelper {
 
 
     private $base_url = 'https://rejestr.io';
-    private $message_error = 'Błedna wartość';
+    private $message_error = 'Błędna wartość';
 
     private $clientHttp;
 

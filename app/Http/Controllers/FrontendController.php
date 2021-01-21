@@ -307,13 +307,14 @@ class FrontendController extends Controller
             'krs.number' => 'nullable|numeric',
             'krs.type' => 'nullable|string'
         ]);
-//        $response = new RecaptchaHelper($request->get('g_recaptcha_response'));
-//        if ($response->check() === false) {
-//            $result['error'] = 'Zaznacz pole z recaptcha!';
-//            return response()->json(['response' => $result]);
-//        }
+        $response = new RecaptchaHelper($request->get('g_recaptcha_response'));
+        if ($response->check() === false) {
+            $result['error'] = 'Zaznacz pole z recaptcha!';
+            return response()->json(['response' => $result]);
+        }
         $api = new KrsHelper();
         $apiResponse = $api->search($request->all());
+        //todo dorobić pdf
 //        \session(['report_krs' => $apiResponse['report'][0]]);
 
         return response()->json(['response' => $apiResponse]);
