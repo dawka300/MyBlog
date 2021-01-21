@@ -13,18 +13,11 @@ use App\Topic;
 use App\User;
 use App\Helpers\GusHelper;
 use Barryvdh\DomPDF\Facade as PDF;
-use DateTimeImmutable;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use GusApi\BulkReportTypes;
-use GusApi\Exception\InvalidUserKeyException;
-use GusApi\Exception\NotFoundException;
-use GusApi\GusApi;
-use GusApi\ReportTypes;
+
 
 class FrontendController extends Controller
 {
@@ -280,8 +273,9 @@ class FrontendController extends Controller
         }
         $api = new GusHelper();
         $apiResponse = $api->search($request->all());
-        \session(['report_gus' => $apiResponse['report'][0]]);
-
+        if(!empty($apiResponse['report'])) {
+            \session(['report_gus' => $apiResponse['report'][0]]);
+        }
         return response()->json(['response' => $apiResponse]);
 
     }

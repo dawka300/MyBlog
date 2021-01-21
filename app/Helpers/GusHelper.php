@@ -76,7 +76,8 @@ class GusHelper extends AbstractApiHelper {
 
             return $result;
         } catch (NotFoundException $e) {
-            $result['error'] = 'No data found. For more information read server message below: '. $this->GusApi->getResultSearchMessage();
+//            $result['error'] = 'No data found. For more information read server message below: '. $this->GusApi->getResultSearchMessage();
+            $result['error'] = 'Nie znaleziono podmiotu o podanym numerze. Sprawdź numer i spróbuj jeszcze raz.';
 
             return $result;
         }
