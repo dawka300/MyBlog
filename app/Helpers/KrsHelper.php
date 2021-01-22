@@ -7,13 +7,20 @@ namespace App\Helpers;
 
 use App\Helpers\Construction\AbstractApiHelper;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 
 class KrsHelper extends AbstractApiHelper {
-
+    const ERRORS = [
+        '400' => 'Niepoprawne zapytanie',
+        '401' => 'Klucz API nie został podany lub jest nieważny.',
+        '403' => 'Przekroczono liczbę opłaconych zapytań API.',
+        '404' => 'Żądany obiekt nie został znaleziony - sprawdź wprowadzony numer!',
+        '429' => 'Przekroczono liczbę zapytań API na minutę.',
+        '500' => 'Wewnętrzny błąd serwera.'
+    ];
 
     private $base_url = 'https://rejestr.io';
-    private $message_error = 'Błędna wartość';
 
     private $clientHttp;
 
@@ -45,7 +52,7 @@ class KrsHelper extends AbstractApiHelper {
                 }
 
             }elseif(!in_array($key, self::AVAILABLE_VALUES)) {
-                $message['error'] = $this->message_error;
+                $message['error'] = self::ERRORS['400'];
 
                 return $message;
             }
@@ -54,57 +61,94 @@ class KrsHelper extends AbstractApiHelper {
     }
 
     public function getDataByQuery(string $arg, string $value){
-        $response = $this->clientHttp->get( '/api/v1/krs', [
-            'query' => [$arg => $value]
-        ]);
-        $response = json_decode($response->getBody()->getContents());
+        try {
+            $response = $this->clientHttp->get('/api/v1/krs', [
+                'query' => [$arg => $value]
+            ]);
+            $response = json_decode($response->getBody()->getContents());
+            if(!empty($response->items)){
+                return $response->items[0];
+            }else{
+                return ['error' => self::ERRORS['404']];
+            }
 
-        return $response->items[0];
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
     public function getByKrs(string $number) {
-        $response = $this->clientHttp->get( '/api/v1/krs/'.$number);
+        try {
+            $response = $this->clientHttp->get( '/api/v1/krs/'.$number);
 
-        return $this->responseConvert($response);
+            return $this->responseConvert($response);
+        }catch (GuzzleException $e){
+            return $this->errorHandling($e);
+        }
+
     }
 
     public function getRelations(string $number) {
-        $response = $this->clientHttp->get( '/api/v1/krs/'.$number.'/relations');
+        try {
+            $response = $this->clientHttp->get('/api/v1/krs/' . $number . '/relations');
 
-        return $this->responseConvert($response);
+            return $this->responseConvert($response);
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
     public function getEntries(string $number) {
-        $response = $this->clientHttp->get( '/api/v1/krs/'.$number.'/entries');
+        try {
+            $response = $this->clientHttp->get('/api/v1/krs/' . $number . '/entries');
 
-        return $this->responseConvert($response);
+            return $this->responseConvert($response);
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
     // Pobieranie odpisu KRS - dla konta premium
     public function getExtract(string $number) {
-        $response = $this->clientHttp->get( '/api/v1/krs/'.$number.'/extract');
+        try {
+            $response = $this->clientHttp->get('/api/v1/krs/' . $number . '/extract');
 
-        return $this->responseConvert($response);
+            return $this->responseConvert($response);
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
 
     public function getPerson(string $id) {
-        $response = $this->clientHttp->get( '/api/v1/persons/'.$id);
+        try {
+            $response = $this->clientHttp->get('/api/v1/persons/' . $id);
 
-        return $this->responseConvert($response);
+            return $this->responseConvert($response);
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
     public function getPersonRelations(string $id) {
-        $response = $this->clientHttp->get( '/api/v1/persons/'.$id.'/relations');
+        try {
+            $response = $this->clientHttp->get('/api/v1/persons/' . $id . '/relations');
 
-        return $this->responseConvert($response);
+            return $this->responseConvert($response);
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
     //Pobieranie stanu konta
     public function getAccount() {
-        $response = $this->clientHttp->get( '/api/v1/account/balance');
+        try {
+            $response = $this->clientHttp->get('/api/v1/account/balance');
 
-        return $response->getBody()->getContents();
+            return $response->getBody()->getContents();
+        } catch (GuzzleException $e) {
+            return $this->errorHandling($e);
+        }
     }
 
     /**
@@ -113,5 +157,12 @@ class KrsHelper extends AbstractApiHelper {
      */
     protected function responseConvert($data) {
         return json_decode($data->getBody()->getContents());
+    }
+
+    protected function errorHandling(GuzzleException $e): array
+    {
+        $response['error'] = 'Wystąpił błąd: '.self::ERRORS[$e->getCode()];
+
+        return $response;
     }
 }

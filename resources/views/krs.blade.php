@@ -95,6 +95,9 @@
                             </div>
                         </div>
                     </form>
+                    <div class="alert alert-danger" style="display: none;">
+
+                    </div>
                     <div class="col-12" id="display">
 
                     </div>
@@ -109,6 +112,7 @@
                             messageRegon: 'Pole może składać się wyłącznie z 9 cyfr',
                             editField: null,
                             additionalOptionDiv: $('div.additional_options'),
+                            errorField: $('div.alert-danger'),
                             onInit: function () {
                                 this.addEvents();
                                 this.submitForm.submit((e) => {
@@ -175,12 +179,12 @@
                                             g_recaptcha_response: grecaptcha.getResponse(),
                                         },
                                         success: function (data) {
+                                            grecaptcha.reset();
                                             if (data.response.error) {
-                                                alert(data.response.error);
+                                                that.displayError(data.response.error);
 
                                                 return;
                                             }
-                                            grecaptcha.reset();
                                             that.clearFields();
                                             let display = null;
                                             if (Array.isArray(data.response)) {
@@ -278,6 +282,13 @@
                                     </div><hr>`;
                                 }
                                 return text;
+                            },
+                            displayError(data) {
+                                this.errorField.html(`<p>${data}</p>`);
+                                this.errorField.fadeIn('slow');
+                                setTimeout(() => {
+                                    this.errorField.fadeOut('slow');
+                                }, 5000);
                             }
 
                         }

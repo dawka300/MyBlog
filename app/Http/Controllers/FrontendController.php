@@ -242,11 +242,6 @@ class FrontendController extends Controller
 
     public function krs()
     {
-//        $clientHttp = new KrsHelper();
-//        $response = $clientHttp->search(['nip' => '', 'regon' => '',
-//            'krs' => ['number' => '0000305178', 'type' => 'entries']]);
-//        $response = $clientHttp->getByKrs('759281');
-//        dd($response);
         return view('krs', [
             'settings' => $this->settings,
             'topics' => $this->topics,
