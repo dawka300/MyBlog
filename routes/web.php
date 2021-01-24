@@ -33,6 +33,9 @@ Route::get('/ajax-gus/pdf', 'FrontendController@ajaxGusPdf')->name('ajax_gus_pdf
 Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
 Route::get('/polityka-cookie', 'FrontendController@cookie')->name('cookie');
 Route::post('/mail', 'FrontendController@send')->name('mail');
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function (){
     Route::get('/home', 'HomeController@index')->name('home');

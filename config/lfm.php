@@ -16,6 +16,7 @@ return [
      */
 
     'use_package_routes'       => true,
+    'allow_private_folder'     => true,
 
     // // Use relative paths (without domain)
     // 'relative_paths'           => false,
