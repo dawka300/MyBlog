@@ -19,7 +19,7 @@
         <meta name="description" content="prawo, porady prawne, prawnik, blog prawny, radca prawny, aplikacja radcowska">
     @endif
 
-<!-- CSRF Token -->
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Blogprawo.pl') }}</title>
@@ -35,6 +35,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
 
     <!-- Fonts -->
