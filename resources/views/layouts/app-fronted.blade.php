@@ -36,8 +36,6 @@
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
 
-    <!-- Theme Style -->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="{{asset('fonts/ionicons/css/ionicons.css')}}">
@@ -252,13 +250,9 @@
 
 </div>
 <script src="{{asset('js/jquery-migrate-3.0.0.js')}}"></script>
-{{--<script src="js/bootstrap.min.js"></script>--}}
-<script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
-{{--<script src="{{asset('js/MyJs.js')}}"></script>--}}
-
 </body>
 </html>
