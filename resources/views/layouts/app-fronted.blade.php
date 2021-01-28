@@ -129,7 +129,7 @@
                                     <a class="dropdown-item" href="{{route('pesel')}}">PESEL</a>
                                     <a class="dropdown-item" href="{{route('gus')}}">Dane GUS</a>
                                     <a class="dropdown-item" href="{{route('krs')}}">Dane KRS</a>
-
+                                    <a class="dropdown-item" href="https://www.orzeczenia.blogprawo.pl">Orzeczenia</a>
                             </div>
 
                         </li>
