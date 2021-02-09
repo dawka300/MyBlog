@@ -20,7 +20,7 @@ class GusHelper extends AbstractApiHelper {
         $this->GusApi = new GusApi($this->key);
     }
 
-    public function search(array $request){
+    public function search(array $request): array {
 
         $data = null;
         foreach ($request as $key => $value){

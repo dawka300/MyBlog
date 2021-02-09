@@ -35,7 +35,7 @@ class KrsHelper extends AbstractApiHelper {
 
     }
 
-    public function search(array $request) {
+    public function search(array $request): array {
         foreach ($request as $key => $value) {
             if(!empty($value) && $key !== self::KRS && in_array($key, self::AVAILABLE_VALUES)) {
                 return $this->getDataByQuery($key, (string)$value);
