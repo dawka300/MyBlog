@@ -37,9 +37,6 @@ class FrontendController extends Controller
         $this->lastPosts = Cache::remember('lastPosts', $this->timeOfCache, function () {
             return Post::withoutTrashed()->orderBy('id', 'desc')->take(3)->get();
         });
-        /* $this->posts = Cache::remember('posts', $this->timeOfCache, function (){
-            return  Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
-         });*/
         $this->posts = Post::withoutTrashed()->orderBy('id', 'desc')->paginate(8);
         $this->markedPosts = Cache::remember('markedPosts', $this->timeOfCache, function () {
             return Post::withoutTrashed()->where('marked', 1)->orderBy('id', 'desc')->get();
@@ -48,119 +45,69 @@ class FrontendController extends Controller
 
     public function index()
     {
-        return view('index', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('index', $this->basicVariables());
     }
 
     public function about()
     {
-        return view('about', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('about', $this->basicVariables());
     }
 
     public function contact()
     {
 
-        return view('contact', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('contact', $this->basicVariables());
     }
 
     public function topics($id)
     {
         $topic = Topic::find($id);
-        return view('topics', [
-            'topic' => $topic,
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+
+        return view('topics', $this->basicVariables(
+            [
+                'topic' => $topic,
+            ])
+        );
     }
 
     public function tags($id)
     {
         $tag = Tag::find($id);
-        return view('tags', [
-            'tag' => $tag,
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+
+        return view('tags', $this->basicVariables(
+            [
+                'tag' => $tag,
+            ]
+        ));
     }
 
     public function single($slug)
     {
         $postRead = Post::where('slug', $slug)->first();
 
-        return view('single', [
-            'postRead' => $postRead,
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('single', $this->basicVariables(
+            [
+                'postRead' => $postRead,
+            ]
+        ));
 
     }
 
     public function pesel()
     {
 
-        return view('pesel', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('pesel', $this->basicVariables());
     }
 
     public function jokes()
     {
         $jokes = Joke::all();
 
-        return view('jokes', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'jokes' => $jokes,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('jokes', $this->basicVariables(
+            [
+                'jokes' => $jokes,
+            ]
+        ));
     }
 
     public function result(Request $request)
@@ -169,17 +116,12 @@ class FrontendController extends Controller
             ->orWhere('content', 'like', '%' . $request->word . '%')
             ->get();
 
-        return view('result', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'results' => $results,
-            'word' => $request->word,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('result', $this->basicVariables(
+            [
+                'results' => $results,
+                'word' => $request->word,
+            ]
+        ));
     }
 
     public function send(Request $request)
@@ -216,41 +158,17 @@ class FrontendController extends Controller
 
     public function cookie()
     {
-        return view('cookie', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('cookie', $this->basicVariables());
     }
 
     public function gus()
     {
-        return view('gus', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('gus', $this->basicVariables());
     }
 
     public function krs()
     {
-        return view('krs', [
-            'settings' => $this->settings,
-            'topics' => $this->topics,
-            'tags' => $this->tags,
-            'user' => $this->user,
-            'posts' => $this->posts,
-            'lastPosts' => $this->lastPosts,
-            'markedPosts' => $this->markedPosts
-        ]);
+        return view('krs', $this->basicVariables());
     }
 
     public function ajaxGus(Request $request)
@@ -268,7 +186,7 @@ class FrontendController extends Controller
         }
         $api = new GusHelper();
         $apiResponse = $api->search($request->all());
-        if(!empty($apiResponse['report'])) {
+        if (!empty($apiResponse['report'])) {
             \session(['report_gus' => $apiResponse['report'][0]]);
         }
         return response()->json(['response' => $apiResponse]);
@@ -287,6 +205,7 @@ class FrontendController extends Controller
         }
 
     }
+
     public function ajaxKrs(Request $request)
     {
 
@@ -308,6 +227,26 @@ class FrontendController extends Controller
 
         return response()->json(['response' => $apiResponse]);
 
+    }
+
+    protected function basicVariables(?array $data = null): array
+    {
+        $basicVariables = [
+            'settings' => $this->settings,
+            'topics' => $this->topics,
+            'tags' => $this->tags,
+            'user' => $this->user,
+            'posts' => $this->posts,
+            'lastPosts' => $this->lastPosts,
+            'markedPosts' => $this->markedPosts,
+        ];
+
+        if (empty($data)) {
+
+            return $basicVariables;
+        }
+
+        return array_merge($basicVariables, $data);
     }
 
 
