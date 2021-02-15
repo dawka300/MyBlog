@@ -23,13 +23,14 @@
                     <td><i>{{$post->title}}</i></td>
                     <td>{!!Str::limit($post->content, 200, '...')!!}</td>
                     <td>{{$post->marked==1 ? 'Tak' : 'Nie'}}</td>
-                    <td><a href="{{route('posts.edit', ['id'=>$post->id])}}" class="btn btn-info">Edytuj</a>
+                    <td><a href="{{route('trashed-restore', ['id'=>$post->id])}}" class="btn-sm btn-success">Przywróć</a>
                         <br>
-                        <form action="{{action('PostsController@delete', ['id'=>$post->id])}}" method="post">
+{{--                        <a href="{{route('posts.edit', ['id'=>$post->id])}}" class="btn-sm btn-secondary">Edytuj</a>--}}
+                       {{-- <form action="{{action('PostsController@delete', ['id'=>$post->id])}}" method="post">
                             @method('delete')
                             @csrf
                             <button onclick="return confirm('Czy chcesz całkowicie usunąć wpis?')" class="btn btn-danger" type="submit">Usuń</button>
-                        </form>
+                        </form>--}}
                     </td>
                 </tr>
             @endforeach

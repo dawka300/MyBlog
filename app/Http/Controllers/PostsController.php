@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Tag;
 use App\Topic;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {
@@ -26,7 +31,7 @@ class PostsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function create()
     {
@@ -40,8 +45,8 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -68,7 +73,7 @@ class PostsController extends Controller
         $filePath=substr($filePath,0, strrpos($filePath, '/')+1);
         $thumbnailPath=$filePath.'thumbs/'.$file_name;
 
-        $post=Post::create([
+        $post = Post::create([
             'title'=>$request->title,
             'content'=>$request->input('content'),
             'user_id'=>Auth::id(),
@@ -96,7 +101,7 @@ class PostsController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -107,26 +112,24 @@ class PostsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function edit($id)
     {
-        $post=Post::find($id);
+        $post=Post::where('id', $id)->withTrashed()->first();
         $tags=Tag::all();
         $topics=Topic::all()->pluck('topic', 'id');
 
-//        dd($post->tags[1]->pivot_tag_id);
-
         return view('posts.edit', ['tags'=>$tags, 'topics'=>$topics, 'post'=>$post]);
-
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -177,7 +180,7 @@ class PostsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
