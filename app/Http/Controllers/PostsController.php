@@ -117,6 +117,9 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post=Post::where('id', $id)->withTrashed()->first();
+        if (!empty($post->deleted_at)) {
+            $post->restore();
+        };
         $tags=Tag::all();
         $topics=Topic::all()->pluck('topic', 'id');
 
