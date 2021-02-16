@@ -11,6 +11,8 @@
 |
 */
 
+use UniSharp\LaravelFilemanager\Lfm;
+
 Route::get('/symlink', function (){
     $exitCode=Artisan::call('storage:link');
     echo $exitCode;
@@ -34,7 +36,7 @@ Route::get('/dowcipy', 'FrontendController@jokes')->name('jokes');
 Route::get('/polityka-cookie', 'FrontendController@cookie')->name('cookie');
 Route::post('/mail', 'FrontendController@send')->name('mail');
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
+    Lfm::routes();
 });
 Auth::routes(['register' => false]);
 Route::middleware(['auth'])->group(function (){
